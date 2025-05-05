@@ -63,3 +63,7 @@ fastlane/test_output
 
 # DS Store
 .DS_Store
+
+# TestsFolder
+ThreadsCloneTests/
+ThreadsCloneUITests/
