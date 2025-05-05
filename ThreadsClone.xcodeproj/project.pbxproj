@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		6734B4EB2DC8AFF600B0D468 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6734B4EA2DC8AFF600B0D468 /* README.md */; };
+		6734B4EF2DC8B0CF00B0D468 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6734B4EE2DC8B0CF00B0D468 /* .gitignore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		676FFAEF2DC86A4500B92CF6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,12 +29,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6734B4EA2DC8AFF600B0D468 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		6734B4EE2DC8B0CF00B0D468 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		676FFAE12DC86A4400B92CF6 /* ThreadsClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThreadsClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		676FFAEE2DC86A4500B92CF6 /* ThreadsCloneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThreadsCloneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		676FFAF82DC86A4500B92CF6 /* ThreadsCloneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThreadsCloneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		6734B4E02DC8AC1800B0D468 /* ScreenShots */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ScreenShots;
+			sourceTree = "<group>";
+		};
 		676FFAE32DC86A4400B92CF6 /* ThreadsClone */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = ThreadsClone;
@@ -75,6 +87,9 @@
 		676FFAD82DC86A4400B92CF6 = {
 			isa = PBXGroup;
 			children = (
+				6734B4EE2DC8B0CF00B0D468 /* .gitignore */,
+				6734B4EA2DC8AFF600B0D468 /* README.md */,
+				6734B4E02DC8AC1800B0D468 /* ScreenShots */,
 				676FFAE32DC86A4400B92CF6 /* ThreadsClone */,
 				676FFAF12DC86A4500B92CF6 /* ThreadsCloneTests */,
 				676FFAFB2DC86A4500B92CF6 /* ThreadsCloneUITests */,
@@ -108,6 +123,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				6734B4E02DC8AC1800B0D468 /* ScreenShots */,
 				676FFAE32DC86A4400B92CF6 /* ThreadsClone */,
 			);
 			name = ThreadsClone;
@@ -212,6 +228,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6734B4EF2DC8B0CF00B0D468 /* .gitignore in Resources */,
+				6734B4EB2DC8AFF600B0D468 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
