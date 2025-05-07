@@ -15,7 +15,10 @@ struct RegistrationView: View {
     @State private var password: String = ""
     @State private var fullname: String = ""
     @State private var username: String = ""
-
+    // @Environment는 SwiftUI에서 환경 값을 읽는 데 사용되는 프로퍼티 래퍼입니다.
+    // 이 경우, dismiss는 현재 뷰를 닫는 데 사용됩니다.
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         // VStack을 사용하여 뷰를 세로로 쌓습니다.
         VStack {
@@ -57,9 +60,11 @@ struct RegistrationView: View {
             Spacer()
 
             Divider()
-
+            // 이곳에서 버튼을 사용하여 로그인 화면으로 이동합니다.
             Button {
-
+                // dismiss()를 호출하여 현재 뷰를 닫습니다.
+                // 이 경우, 로그인 화면으로 돌아갑니다.
+                dismiss()
             } label: {
                 HStack(spacing: 3) {
                     Text("Already have an account?")
