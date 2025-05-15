@@ -15,3 +15,8 @@
     <img src="ScreenShots/tab_activityview.png" alt="tab_activityview" width="200"/>
 <img src="ScreenShots/tab_profileview.png" alt="tab_profileview" width="200"/>
 </div>
+
+
+<div style="display: inline-block;">
+    <img src="ScreenShots/feedview_detail.png" alt="feedview_detail" width="300"/>
+</div>
