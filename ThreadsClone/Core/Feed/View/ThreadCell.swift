@@ -16,11 +16,8 @@ struct ThreadCell: View {
                 // frame은 이미지의 크기를 지정하는 것
                 // clipShape은 이미지를 자르는 것
                 // Circle()은 원형으로 자르는 것
-                Image("yoon-profile")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 40, height: 40)
-                    .clipShape(Circle())
+                CircularProfileImageView()
+                    
                 // .leading은 왼쪽 정렬
                 // .top은 위쪽 정렬
                 // .trailing은 오른쪽 정렬

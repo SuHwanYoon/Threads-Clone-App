@@ -19,4 +19,5 @@
 
 <div style="display: inline-block;">
     <img src="ScreenShots/feedview_detail.png" alt="feedview_detail" width="300"/>
+    <img src="ScreenShots/exploreview_detail.png" alt="exploreview_detail" width="300"/>
 </div>
