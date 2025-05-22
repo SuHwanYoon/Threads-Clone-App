@@ -21,3 +21,8 @@
     <img src="ScreenShots/feedview_detail.png" alt="feedview_detail" width="300"/>
     <img src="ScreenShots/exploreview_detail.png" alt="exploreview_detail" width="300"/>
 </div>
+
+<div style="display: inline-block;">
+    <img src="ScreenShots/thread_tap_select.png" alt="thread_tap_select" width="300"/>
+    <img src="ScreenShots/repliles_tap_select.png" alt="repliles_tap_select" width="300"/>
+</div>
