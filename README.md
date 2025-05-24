@@ -26,3 +26,8 @@
     <img src="ScreenShots/thread_tap_select.png" alt="thread_tap_select" width="300"/>
     <img src="ScreenShots/repliles_tap_select.png" alt="repliles_tap_select" width="300"/>
 </div>
+
+<div style="display: inline-block;">
+    <img src="ScreenShots/edit_prifileview1.png" alt="edit_prifileview1" width="300"/>
+    <img src="ScreenShots/edit_prifileview2.png" alt="edit_prifileview2" width="300"/>
+</div>
