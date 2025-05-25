@@ -13,7 +13,7 @@
 <div style="display: inline-block;">
     <img src="ScreenShots/tab_createview.png" alt="tab_createview" width="200"/>
     <img src="ScreenShots/tab_activityview.png" alt="tab_activityview" width="200"/>
-<img src="ScreenShots/tab_profileview.png" alt="tab_profileview" width="200"/>
+    <img src="ScreenShots/tab_profileview.png" alt="tab_profileview" width="200"/>
 </div>
 
 
@@ -30,4 +30,11 @@
 <div style="display: inline-block;">
     <img src="ScreenShots/edit_prifileview1.png" alt="edit_prifileview1" width="300"/>
     <img src="ScreenShots/edit_prifileview2.png" alt="edit_prifileview2" width="300"/>
+</div>
+
+
+<div style="display: inline-block;">
+    <img src="ScreenShots/create_threads_view1.png" alt="create_threads_view1" width="200"/>
+    <img src="ScreenShots/create_threads_view2.png" alt="create_threads_view2" width="200"/>
+    <img src="ScreenShots/create_threads_view3.png" alt="create_threads_view3" width="200"/>
 </div>
