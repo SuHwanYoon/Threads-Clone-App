@@ -8,13 +8,11 @@
 import SwiftUI
 
 struct RegistrationView: View {
-    // @State를 사용하여 상태 변수를 선언합니다.
-    // @State는 SwiftUI에서 상태를 관리하는 데 사용되는 프로퍼티 래퍼입니다.
-    // 이 변수가 변경되면 뷰가 자동으로 업데이트됩니다.
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @State private var fullname: String = ""
-    @State private var username: String = ""
+    // @StateObject는 SwiftUI에서 상태 객체를 생성하는 데 사용되는 프로퍼티 래퍼입니다.
+    // 이 경우, RegistrationViewModel을 상태 객체로 사용하여 뷰의 상태를 관리합니다.
+    // RegistrationViewModel은 사용자 등록 관련 로직을 처리하는 뷰 모델입니다.
+    @StateObject var viewModel = RegistrationViewModel()
+
     // @Environment는 SwiftUI에서 환경 값을 읽는 데 사용되는 프로퍼티 래퍼입니다.
     // 이 경우, dismiss는 현재 뷰를 닫는 데 사용됩니다.
     @Environment(\.dismiss) var dismiss
@@ -31,21 +29,24 @@ struct RegistrationView: View {
                 .padding()
 
             VStack {
-                TextField("Enter Email", text: $email)
+                TextField("Enter Email", text: $viewModel.email)
                     .modifier(TextFiledModifier())
                 
-                SecureField("Enter Password", text: $password)
+                SecureField("Enter Password", text: $viewModel.password)
                     .modifier(TextFiledModifier())
                 
-                TextField("Enter full name", text: $fullname)
+                TextField("Enter full name", text: $viewModel.fullname)
                     .modifier(TextFiledModifier())
                 
-                TextField("Enter username", text: $username)
+                TextField("Enter username", text: $viewModel.username)
                     .modifier(TextFiledModifier())
             }
 
             Button {
-
+                // Task는 Swift Concurrency에서 비동기 작업을 나타내는 구조체입니다.
+                // try await를 사용하여 비동기 작업을 수행합니다.
+                // viewModel.createUser() 메서드를 호출하여 사용자를 생성합니다.
+                Task { try await viewModel.createUser()}
             } label: {
                 Text("Sign Up")
                     .font(.subheadline)
