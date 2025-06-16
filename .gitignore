@@ -67,3 +67,4 @@ fastlane/test_output
 # TestsFolder
 ThreadsCloneTests/
 ThreadsCloneUITests/
+ThreadsClone/GoogleService-Info.plist
