@@ -38,3 +38,11 @@
     <img src="ScreenShots/create_threads_view2.png" alt="create_threads_view2" width="200"/>
     <img src="ScreenShots/create_threads_view3.png" alt="create_threads_view3" width="200"/>
 </div>
+
+
+<div style="display: inline-block;">
+    <img src="ScreenShots/email-format-auth-fail.png" alt="email-format-auth-fail" />
+    <img src="ScreenShots/password-char-auth-fail.png" alt="password-char-auth-fail" />
+    <img src="ScreenShots/user-create-success.png" alt="user-create-success" />
+    <img src="ScreenShots/firebase-auth-user.png" alt="firebase-auth-user" />
+</div>
