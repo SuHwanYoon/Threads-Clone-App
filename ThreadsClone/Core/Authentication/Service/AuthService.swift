@@ -9,16 +9,40 @@ import Firebase
 import FirebaseAuth
 
 class AuthService{
+    // userSession 프로퍼티는 현재 로그인된 사용자의 세션 정보를 저장합니다.
+    // FirebaseAuth.User? 타입으로 선언되어 있으며, 이는 Firebase Authentication에서 사용되는 사용자 객체를 나타냅니다.
+    // @Published는 SwiftUI에서 상태 변화를 감지하고 UI를 업데이트하기 위해 사용되는 프로퍼티 래퍼입니다.
+    @Published var userSession: FirebaseAuth.User?
+    
     
     // 싱글톤 패턴을 사용하여 AuthService의 인스턴스를 공유합니다.
     // let은 상수선언
     // shared는 AuthService의 유일한 인스턴스를 나타내며, 앱 전체에서 이 인스턴스를 사용할 수 있습니다.
     static let shared = AuthService()
     
+    // 초기화 메서드입니다.
+    // 이 메서드는 AuthService의 인스턴스를 생성할 때 호출되며, 현재 로그인된 사용자의 세션을 가져옵니다.
+    // FirebaseAuth의 currentUser 프로퍼티를 사용하여 현재 로그인된 사용자의 정보를 가져옵니다.
+    // 이 정보를 userSession 프로퍼티에 할당합니다.
+    // 이렇게 함으로써, 앱이 시작될 때 현재 로그인된 사용자의 세션 정보를 자동으로 가져올 수 있습니다.
+    // 이 초기화 메서드는 AuthService의 인스턴스가 생성될 때 한 번만 호출됩니다.
+    // 따라서, 앱이 시작될 때 현재 로그인된 사용자의 세션 정보를 항상 가져올 수 있습니다.
+    init (){
+        self.userSession = Auth.auth().currentUser
+    }
+    
+    
     // withEmail 메서드는 이메일과 비밀번호를 사용하여 사용자를 로그인하는 기능을 제공합니다.
     @MainActor
     func login(withEmail email: String, password: String) async throws {
-        
+        do{
+            let result = try await Auth.auth().signIn(withEmail: email, password: password)
+            // 로그인 성공 시 userSession 프로퍼티에 로그인된 사용자의 세션 정보를 저장합니다.
+            self.userSession = result.user
+            print("Debug: User Logged in with UID: \(result.user.uid)")
+        } catch{
+            print("Debug: Failed to Login user with error: \(error.localizedDescription)")
+        }
     }
     
     // createUser 메서드는 이메일, 비밀번호, 전체 이름, 사용자 이름을 사용하여 새로운 사용자를 생성하는 기능을 제공합니다.
@@ -31,10 +55,21 @@ class AuthService{
     func createUser(withEmail email: String, password: String, fullName: String, username: String) async throws {
         do{
             let result = try await Auth.auth().createUser(withEmail: email, password: password)
+            // 사용자 생성이 성공하면 userSession 프로퍼티에 생성된 사용자의 세션 정보를 저장합니다.
+            self.userSession = result.user
             print("Debug: User created with UID: \(result.user.uid)")
         } catch{
             print("Debug: Failed to create user with error: \(error.localizedDescription)")
         }
+    }
+    
+    // signOut 메서드는 사용자를 로그아웃하는 기능을 제공합니다.
+    // 이 메서드는 Firebase Authentication의 signOut 메서드를 호출하여 현재 로그인된 사용자의 세션을 종료합니다.
+    // try?를 사용하여 로그아웃 작업이 실패하더라도 오류를 무시하고 계속 진행합니다.
+    // 로그아웃 후에는 userSession 프로퍼티를 nil로 설정하여 현재 로그인된 사용자가 없음을 나타냅니다.
+    func signOut(){
+        try? Auth.auth().signOut()
+        self.userSession = nil
     }
     
 }

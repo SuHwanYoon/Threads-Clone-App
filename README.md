@@ -46,3 +46,16 @@
     <img src="ScreenShots/user-create-success.png" alt="user-create-success" />
     <img src="ScreenShots/firebase-auth-user.png" alt="firebase-auth-user" />
 </div>
+
+
+
+<div style="display: inline-block;">
+    <img src="ScreenShots/login_success.png" alt="login_success" />
+    <img src="ScreenShots/login_success2.png" alt="login_success2" />
+</div>
+
+
+<div style="display: inline-block;">
+    <img src="ScreenShots/signout_button.png" alt="signout_button" width="300"/>
+    <img src="ScreenShots/signout_success.png" alt="signout_success" width="300"/>
+</div>

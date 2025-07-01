@@ -11,8 +11,13 @@ struct LoginView: View {
     // @State를 사용하여 상태 변수를 선언합니다.
     // @State는 SwiftUI에서 상태를 관리하는 데 사용되는 프로퍼티 래퍼입니다.
     // 이 변수가 변경되면 뷰가 자동으로 업데이트됩니다.
-    @State private var email: String = ""
-    @State private var password: String = ""
+//    @State private var email: String = ""
+//    @State private var password: String = ""
+    // LoginViewModel은 로그인 뷰의 상태를 관리하는 뷰모델을 선언
+    // 선언해두면 해당 뷰에서 사용할 수 있습니다.
+    // 뷰모델의 프로퍼티도 viewModel.email, viewModel.password 등으로 접근할 수 있습니다.
+    @StateObject var viewModel = LoginViewModel()
+    
     var body: some View {
         // 네비게이션 스택은 SwiftUI에서 화면 전환을 관리하는 데 사용되는 구조입니다.
         // 네비게이션 스택은 화면을 쌓아서 관리합니다.
@@ -30,11 +35,11 @@ struct LoginView: View {
 
                 VStack {
                     // email 필드
-                    TextField("Enter Email", text: $email)
+                    TextField("Enter Email", text: $viewModel.email)
                         .autocapitalization(.none)
                         .modifier(TextFiledModifier())
                     // password 필드
-                    SecureField("Enter Password", text: $password)
+                    SecureField("Enter Password", text: $viewModel.password)
                         .modifier(TextFiledModifier())
 
                 }
@@ -56,7 +61,9 @@ struct LoginView: View {
                 }
 
                 Button {
-
+                    // Task는 Swift Concurrency에서 비동기 작업을 나타내는 구조체입니다.
+                    // await로 비동기 작업이 완료될 때까지 기다림
+                    Task {try await viewModel.login() }
                 } label: {
                     Text("Login")
                         .font(.subheadline)

@@ -67,4 +67,23 @@ fastlane/test_output
 # TestsFolder
 ThreadsCloneTests/
 ThreadsCloneUITests/
+
+# Firebase
 ThreadsClone/GoogleService-Info.plist
+
+# Xcode user & shared data
+*.xcuserstate
+*.xcuserdata/
+*.xcworkspace/xcuserdata/
+*.xcworkspace/xcshareddata/
+*.xcodeproj/xcshareddata/
+
+# Derived data
+DerivedData/
+
+# BFG / 임시 파일
+Threads-Clone-App.git/
+Threads-Clone-App.git.bfg-report/
+
+# 이미지 등 설명용 자료
+ScreenShots/*.png
