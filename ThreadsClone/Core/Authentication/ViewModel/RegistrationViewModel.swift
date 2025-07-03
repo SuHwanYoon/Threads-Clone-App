@@ -29,6 +29,7 @@ class RegistrationViewModel: ObservableObject {
     // 이 메서드는 사용자 생성 작업을 시작하고, 성공적으로 완료되면 UI를 업데이트합니다.
     // 만약 작업 중 오류가 발생하면, 해당 오류를 처리할 수 있습니다.
     // async throws는 이 메서드가 비동기적으로 실행되며, 오류를 던질 수 있음을 나타냅니다.
+    // shared는 AuthService의 싱글톤 인스턴스를 사용하여 사용자 생성 작업을 수행합니다.
     @MainActor
     func createUser() async throws {
         // try await는 비동기 작업을 실행하고, 해당 작업이 실패할 경우 오류를 던집니다.
