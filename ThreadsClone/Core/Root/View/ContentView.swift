@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// contentView는 앱의 시작점으로, 로그인 상태에 따라 다른 뷰를 표시합니다.
 struct ContentView: View {
     
     @StateObject var viewModel = ContentViewModel()

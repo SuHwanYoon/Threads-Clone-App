@@ -7,11 +7,14 @@
 
 import Firebase
 import FirebaseAuth
+// FirebaseFirestore는 Firestore 데이터베이스와 상호작용하기 위한 라이브러리입니다.
+import FirebaseFirestore
 
 class AuthService{
     // userSession 프로퍼티는 현재 로그인된 사용자의 세션 정보를 저장합니다.
     // FirebaseAuth.User? 타입으로 선언되어 있으며, 이는 Firebase Authentication에서 사용되는 사용자 객체를 나타냅니다.
     // @Published는 SwiftUI에서 상태 변화를 감지하고 UI를 업데이트하기 위해 사용되는 프로퍼티 래퍼입니다.
+    // 이 userSession은 LoginViewModel와 RegistrationViewModel에서 사용되며, 사용자의 로그인 상태를 관리하고 인증 상태가 변경될 때 UI를 업데이트합니다.
     @Published var userSession: FirebaseAuth.User?
     
     
@@ -72,4 +75,26 @@ class AuthService{
         self.userSession = nil
     }
     
+    
+    // uploadUserData 메서드는 사용자의 프로필 데이터를 Firestore에 업로드하는 기능을 제공합니다.
+    @MainActor
+    func uploadUserData
+    (withEmail email: String,
+     fullname: String,
+     username: String,
+     id: String)
+    async throws {
+        let user = User(id: id, fullname: fullname, email: email, username: username )
+        // guard let 구문은 user 객체를 Firestore에 인코딩할 때 사용됩니다.
+        // Firestore.Encoder().encode(user)는 User 객체를 Firestore에 저장할 수 있는 형식으로 변환합니다.
+        // 만약 인코딩이 실패하면 메서드를 종료합니다.
+        guard let userData = try? Firestore.Encoder().encode(user) else {return}
+        // Firestore 데이터베이스에 사용자 데이터를 업로드합니다.
+        // Firestore.firestore()는 Firestore 데이터베이스에 접근하기 위한 메서드입니다.
+        // collection("users")는 "users"라는 임의로 지정한 이름의 컬렉션에 접근합니다.
+        // document(id)는 해당 컬렉션 내에서 특정 사용자의 문서를 지정합니다.
+        // setData(userData)는 지정된 문서에 userData를 저장합니다.
+        try await Firestore.firestore().collection("users")
+            .document(id).setData(userData)
+    }
 }

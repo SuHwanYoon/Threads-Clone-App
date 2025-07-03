@@ -22,12 +22,12 @@ class ContentViewModel: ObservableObject {
         setupSubscribers()
     }
     
-    // setupSubscribers 메서드는 AuthService의 userSession 프로퍼티에 대한 구독자를 설정합니다.
+    
     // 이 메서드는 AuthService.shared.$userSession를 구독하여 userSession의 변경 사항을 감지합니다.
-    // 구독자가 변경 사항을 감지하면, userSession 프로퍼티를 업데이트합니다.
+    // 변경 사항을 감지하면, userSession 프로퍼티를 업데이트합니다.
     // 이 메서드는 AuthService의 userSession 프로퍼티가 변경될 때마다 호출됩니다.
-    // sinks는 Combine 프레임워크에서 제공하는 메서드로, 구독을 생성하고 해당 구독을 관리합니다.
-    // store(in:) 메서드는 구독을 Set<AnyCancellable>에 저장하여, 구독이 해제되지 않도록 합니다.
+    // sinks는 Combine 프레임워크에서 제공하는 메서드로, 데이터 변화감시
+    // store(in:) 메서드는 구독을 Set<AnyCancellable>에 저장하여, 데이터 변화상태를 저장
     private func setupSubscribers(){
         AuthService.shared.$userSession
             .sink { [weak self] userSession in
