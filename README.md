@@ -59,3 +59,8 @@
     <img src="ScreenShots/signout_button.png" alt="signout_button" width="300"/>
     <img src="ScreenShots/signout_success.png" alt="signout_success" width="300"/>
 </div>
+
+
+<div style="display: inline-block;">
+    <img src="ScreenShots/signup_firebase_database.png" alt="signup_firebase_database" />
+</div>

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @StateObject var viewModel = ProfileViewModel()
     // selectedFilter는 현재 선택된 필터를 나타냅니다.
     // Threads탭이 선택되었을때의 상태를 나타냅니다.
     // @Namespace는 뷰간의 애니메이션 전환을 위한 프로퍼티 래퍼
