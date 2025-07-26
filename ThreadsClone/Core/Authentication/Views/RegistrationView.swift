@@ -30,6 +30,7 @@ struct RegistrationView: View {
 
             VStack {
                 TextField("Enter Email", text: $viewModel.email)
+                    .autocapitalization(.none) // 이메일 입력 시 자동 대문자 변환을 방지합니다.
                     .modifier(TextFiledModifier())
                 
                 SecureField("Enter Password", text: $viewModel.password)
