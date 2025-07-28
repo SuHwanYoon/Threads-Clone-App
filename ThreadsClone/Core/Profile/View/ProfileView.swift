@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
+    // @StateObject는 뷰 모델을 상태 객체로 선언합니다.
     @StateObject var viewModel = ProfileViewModel()
     // selectedFilter는 현재 선택된 필터를 나타냅니다.
     // Threads탭이 선택되었을때의 상태를 나타냅니다.
@@ -18,12 +19,19 @@ struct ProfileView: View {
     // filterBarWidth는 필터 바의 너비를 계산하는 프로퍼티입니다.
     // CGFloat는 부동 소수점 숫자를 나타내는 타입입니다.
     // count는 ProfileThreadFilter의 모든 케이스의 개수를 가져옵니다.
-    // UIScreen.main.bounds.width는 화면의 너비를 가져옵니다.
+    // UIScreen.main.bounds.width는 화면의 너비를 가져옵니다.   
     // count - 16은 필터 바의 너비를 계산하는 것입니다.
     private var filterBarWidth: CGFloat {
         let count = CGFloat(ProfileThreadFilter.allCases.count)
         return (UIScreen.main.bounds.width) / count - 16
     }
+    
+    // hardcoding을 대체할 currentUser
+    private var currentUser: User? {
+        // 현재 로그인된 사용자의 정보를 가져옵니다.
+        return viewModel.currentUser
+    }
+    
     var body: some View {
         NavigationStack{
             // showsIndicators: false는 스크롤바를 숨깁니다.
@@ -40,17 +48,24 @@ struct ProfileView: View {
                         VStack(alignment: .leading, spacing: 12) {
                             // Yoon Suhwan과 yoon_suhwan 사이의 간격을 4로 설정합니다.
                             VStack(alignment: .leading, spacing: 4) {
-                                Text("Yoon SuHwan")
+                                Text(currentUser?.fullname ?? "")
                                     .font(.title)
                                     .fontWeight(.semibold)
                                 
-                                Text("yoon_suhwan")
+                                Text(currentUser?.username ?? "")
                                     .font(.subheadline)
                                 
                             }
                             
-                            Text("Developer")
-                                .font(.footnote)
+//                            Text("Developer")
+//                                .font(.footnote)
+                            // bio 정보를 표시하는 if let
+                            // if let 으로 선언하는 이유는 bio가 옵셔녈이며 nil일 수도 있기 때문
+                            // bio가 nil이면 Text 뷰 자체가 표지되지 않음으로 불필요한 빈공간이 생기지 않음
+                            if let bio = currentUser?.bio {
+                                Text(bio)
+                                    .font(.footnote)
+                            }
                             
                             Text("2 followers")
                                 .font(.caption)
@@ -146,8 +161,8 @@ struct ProfileView: View {
                     } label: {
                         // sign out image button
                         Image(systemName: "rectangle.portrait.and.arrow.right")
-                            
-                            
+                        
+                        
                         
                         
                     }
