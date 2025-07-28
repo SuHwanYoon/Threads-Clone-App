@@ -64,3 +64,15 @@
 <div style="display: inline-block;">
     <img src="ScreenShots/signup_firebase_database.png" alt="signup_firebase_database" />
 </div>
+
+## Update Profile with the information of the logged-in user
+<!-- User: yoon , User: john login and profile view fetching Firebase -->
+<div style="display: inline-block;">
+    <img src="ScreenShots/john_login.png" alt="john_login" width="300"/>
+    <img src="ScreenShots/john_profile.png" alt="john_profile" width="300"/>
+</div>
+
+<div style="display: inline-block;">
+    <img src="ScreenShots/yoon_login.png" alt="yoon_login" width="300"/>
+    <img src="ScreenShots/yoon_profile.png" alt="yoon_profile" width="300"/>
+</div>

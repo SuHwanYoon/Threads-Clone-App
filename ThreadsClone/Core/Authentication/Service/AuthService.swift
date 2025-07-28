@@ -45,6 +45,8 @@ class AuthService{
             self.userSession = loginResult.user
             // .uid는 Firebase에서 생성된 사용자의 고유한 ID를 나타냅니다.
             print("Debug: User Logged in with UID: \(loginResult.user.uid)")
+            // UserService.shared.fetchCurrentUser()를 호출하여 현재 사용자의 정보를 가져옵니다.
+            try await UserService.shared.fetchCurrentUser()
         } catch{
             // error.localizedDescription은 로그인 중 발생한 오류의 설명을 출력합니다.
             print("Debug: Failed to Login user with error: \(error.localizedDescription)")
@@ -78,6 +80,8 @@ class AuthService{
     func signOut(){
         try? Auth.auth().signOut()
         self.userSession = nil
+        // signout시 UserService.shared.reset()을 호출하여 현재 사용자 정보를 초기화합니다.
+        UserService.shared.reset()
     }
     
     
