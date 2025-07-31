@@ -26,7 +26,7 @@ struct ProfileView: View {
         return (UIScreen.main.bounds.width) / count - 16
     }
     
-    // hardcoding을 대체할 currentUser
+    // viewModel에서 가져오는 currentUser 프로퍼티
     private var currentUser: User? {
         // 현재 로그인된 사용자의 정보를 가져옵니다.
         return viewModel.currentUser
