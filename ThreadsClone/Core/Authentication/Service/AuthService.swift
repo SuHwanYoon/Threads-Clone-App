@@ -79,8 +79,11 @@ class AuthService{
     // 로그아웃 후에는 userSession 프로퍼티를 nil로 설정하여 현재 로그인된 사용자가 없음을 나타냅니다.
     func signOut(){
         try? Auth.auth().signOut()
+        // 로그아웃 후 userSession을 nil로 설정하여 현재 로그인된 사용자가 없음을 나타냅니다.
+        // 이렇게 함으로써, 앱의 인증 상태가 업데이트되고, 로그인 화면으로 돌아갈 수 있습니다.
+        // FirebaseAuth의 인증 세션만 초기화하며 currentUser의 정보를 초기화하지 않습니다.
         self.userSession = nil
-        // signout시 UserService.shared.reset()을 호출하여 현재 사용자 정보를 초기화합니다.
+        // signout시 UserService.shared.reset()을 호출하여 currentUser를 초기화합니다.
         UserService.shared.reset()
     }
     

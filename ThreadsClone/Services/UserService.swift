@@ -10,6 +10,7 @@ import FirebaseAuth
 import FirebaseFirestore
 
 // 이 서비스는 싱글톤 패턴을 사용하여 애플리케이션 전역에서 단일 인스턴스를 공유합니다.
+// Service는 화면과 분리된 데이터 처리 모듈
 class UserService {
     // @Published 프로퍼티를 사용하여 현재 사용자 정보를 저장하고, SwiftUI에서 이 정보를 구독할 수 있도록 합니다.
     // currentUser 프로퍼티는 Firebase에서 사용자 데이터를 가져올때마다 업데이트하고
@@ -21,6 +22,7 @@ class UserService {
     // 초기화 메서드입니다. UserService의 인스턴스를 생성할 때 호출됩니다.
     // 이 메서드는 fetchCurrentUser()를 호출하여 현재 사용자의 정보를 가져옵
     // Task를 사용하여 비동기적으로 데이터를 가져옵니다.
+    // fetchCurrentUser메서드를 비동기적으로 호출하는 이유는 Firebase에서 데이터를 가져오는 작업이 네트워크 요청을 포함하기 때문입니다.
     init() {
         Task {try await fetchCurrentUser()}
             
@@ -50,6 +52,30 @@ class UserService {
         
         // 현재 사용자 정보를 출력합니다.
         print("Debug: User is \(user)")
+    }
+    
+    // static func는 UserService 클래스의 인스턴스 없이 호출할 수 있는 메서드입니다.
+    // 따라서 shared 인스턴스를 통해 호출할 필요가 없습니다.
+    // -> [User]는 User 모델의 배열을 반환합니다.
+    // fetchUser 메서드는 Firestore에서 모든 사용자의 정보를 가져오는 기능을 제공합니다.
+    // 이 메서드는 비동기적으로 실행되며, 현재 로그인된 사용자의 UID를 제외한 모든 사용자의 정보를 반환합니다.
+    // Firestore에서 "users" 컬렉션의 모든 문서를 가져와서 User 모델로 변환합니다.
+    // 현재 사용자의 UID를 제외한 사용자 목록을 반환합니다.
+    static func fetchUsers() async throws -> [User] {
+        // guard는 조건이 참이 아닐 경우 return을 사용하여 메서드를 종료합니다.
+        guard let currentUid = Auth.auth().currentUser?.uid else { return [] }
+        // snapshot 변수를 사용하여 Firestore에서 "users" 컬렉션의 모든 문서를 가져옵니다.
+        let snapshot = try await Firestore.firestore().collection("users").getDocuments()
+        // snapshot.documents는 Firestore에서 가져온 모든 문서를 포함하는 배열입니다.
+        // data as 로 Json디코딩을 실행하여 User 모델로 변환합니다.
+        // try?를 사용하여 변환이 실패할 경우 에러를 발생시키지 않고 nil을 반환합니다
+        // compactMap 메서드는 nil 값을 제외하고, 유효한 User 모델만을 포함하는 배열을 생성합니다.
+        // 따라서 documents를 가져온 후, 각 문서중 변환 실패한 nil은 제외하고 User 모델로 변환
+        // 이 메서드는 Firestore에서 가져온 모든 사용자 문서를 User 모델로 변환하고,
+        // 현재 사용자의 UID를 제외한 사용자 목록을 반환합니다.
+        let users = snapshot.documents.compactMap { try? $0.data(as: User.self) }
+        // 현재 사용자의 UID와 같은 사용자는 필터링하고 사용자 목록을 반환합니다.
+        return users.filter { $0.id != currentUid }
     }
     
     // func reset
