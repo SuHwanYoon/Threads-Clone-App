@@ -76,3 +76,10 @@
     <img src="ScreenShots/yoon_login.png" alt="yoon_login" width="300"/>
     <img src="ScreenShots/yoon_profile.png" alt="yoon_profile" width="300"/>
 </div>
+
+## Navigation from Explore View to Profile View
+
+<div style="display: inline-block;">
+    <img src="ScreenShots/navigation_to_profileview1.png" alt="navigation_to_profileview1" width="300"/>
+    <img src="ScreenShots/navigation_to_profileview2.png" alt="navigation_to_profileview2" width="300"/>
+</div>

@@ -13,6 +13,7 @@ class ExploreViewModel: ObservableObject {
     // SwiftUI 뷰가 자동으로 업데이트되도록 합니다.
     // User타입의 배열[]로, User들을 한줄로 담은 배열
     // users: [User] = [] 또는 아래와 같이 선언할 수 있습니다.
+    // users에서는 Firebase Firestore에서 가져온 사용자들의 정보를 리스트로 저장합니다.
     @Published var users = [User]()
     
     // fetchUsers 메서드는 ExploreViewModel이 초기화될 때 호출되어
