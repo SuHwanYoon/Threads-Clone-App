@@ -83,3 +83,10 @@
     <img src="ScreenShots/navigation_to_profileview1.png" alt="navigation_to_profileview1" width="300"/>
     <img src="ScreenShots/navigation_to_profileview2.png" alt="navigation_to_profileview2" width="300"/>
 </div>
+
+## GuestUser Profile View    VS   Logged-in User Profile View
+<div style="display: inline-block;">
+    <img src="ScreenShots/button_guestuser_profile.png" alt="button_guestuser_profile" width="300"/>
+    <img src="ScreenShots/button_my_profile.png" alt="button_my_profile" width="300"/>
+</div>
+
