@@ -6,13 +6,20 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct EditProfileView: View {
     // bio, link 텍스트 필드의 상태를 관리하기 위한 @State 변수를 선언합니다.
     // Toggle의 상태를 관리하기 위한 @State 변수입니다.
+    // @Environment(\.dismiss)은 현재 뷰를 닫는 기능을 제공합니다.
+    // CurrentUserProfileViewModel로 현재사용정보를 업데이트하고
+    // 프로필 사진을 선택하는 기능을 제공합니다.
     @State private var bio: String = ""
     @State private var link: String = ""
     @State private var isPrivateProfile: Bool = false
+    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var viewModel: CurrentUserProfileViewModel
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -29,23 +36,43 @@ struct EditProfileView: View {
                         VStack(alignment: .leading) {
                             Text("Name")
                                 .fontWeight(.semibold)
-
+                            
                             Text("Yoon Suhwan")
                         }
                         // Spacer()로 Vstack과 프로필 사진 사이에 빈 공간을 만듭니다.
                         Spacer()
-
-                        // 프로필 사진을 나타내는 CircularProfileImageView입니다.
-                        CircularProfileImageView()
-
+                        
+                        PhotosPicker(selection: $viewModel.selectedItem)  {
+                            // PhotosPicker는 사용자가 사진을 선택할 수 있는 UI 요소입니다.
+                            // selection은 사용자가 선택한 사진을 저장하는 바인딩 변수입니다.
+                            // if let optional binding을 사용하여 선택된 이미지가 있을 때만 이미지를 표시합니다.
+                            // viewModel.profileImage는 선택된 이미지가 있는 경우에만 표시됩니다.
+                            // resizable()는 이미지를 크기에 맞게 조정합니다.
+                            // scaledToFill()은 이미지를 비율에 맞게 채웁니다.
+                            // frame은 이미지의 크기를 지정합니다.
+                            // clipShape(Circle())는 이미지를 원형으로 자릅니다.
+                            if let image = viewModel.profileImage{
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 40, height: 40)
+                                    .clipShape(Circle())
+                            }else{
+                                // CircularProfileImageView는 원형 프로필 이미지를 표시하는 뷰입니다.
+                                CircularProfileImageView()
+                                
+                            }
+                            
+                        }
+                        
                     }
-
+                    
                     // bio 인물 소개를 나타내는 vstack입니다.
                     Divider()
                     VStack(alignment: .leading) {
                         Text("Bio")
                             .fontWeight(.semibold)
-
+                        
                         // TextField는 사용자로부터 텍스트 입력을 받는 UI 요소입니다.
                         // axis: .vertical로 인해 여러 줄 입력이 가능하고 텍스트가 자동으로 줄바꿈됩니다.
                         // text는 @State로 선언된 bio 변수를 바인딩합니다.
@@ -56,13 +83,13 @@ struct EditProfileView: View {
                             axis: .vertical
                         )
                     }
-
+                    
                     // Link를 입력할수있는 VStack 시작
                     Divider()
                     VStack(alignment: .leading) {
                         Text("Link")
                             .fontWeight(.semibold)
-
+                        
                         // TextField는 사용자로부터 텍스트 입력을 받는 UI 요소입니다.
                         // axis: .vertical로 인해 여러 줄 입력이 가능하고 텍스트가 자동으로 줄바꿈됩니다.
                         // text는 @State로 선언된 bio 변수를 바인딩합니다.
@@ -72,13 +99,13 @@ struct EditProfileView: View {
                             text: $link
                         )
                     }
-
+                    
                     // Toggle이 위치하는 부분
                     Divider()
                     // Toggle은 스위치 형태의 UI 요소로, 사용자가 켜고 끌 수 있는 기능을 제공합니다.
                     // isOn은 Toggle의 상태를 나타내는 @State 변수입니다.
                     Toggle("Private profile", isOn: $isPrivateProfile)
-
+                    
                 }
                 // Vstack전체에 적용하는 modifier
                 // 첫번째 paading은 Vstack의 내부 콘텐트와 흰색배경사이의 여백을 주어서 테두리와 여백을 주는 것
@@ -112,6 +139,8 @@ struct EditProfileView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Cancel") {
                         // 취소 버튼을 눌렀을 때의 동작을 여기에 추가합니다.
+                        // Property로 선언된 dismiss를 호출하여 현재 뷰를 닫습니다.
+                        dismiss()
                     }
                     .font(.subheadline)
                     .foregroundColor(.black)

@@ -90,3 +90,14 @@
     <img src="ScreenShots/button_my_profile.png" alt="button_my_profile" width="300"/>
 </div>
 
+## Edit My Profile Photo Image
+<div style="display: inline-block;">
+    <img src="ScreenShots/edit_profile_process1.png" alt="edit_profile_process1" width="300"/>
+    <img src="ScreenShots/edit_profile_process2.png" alt="edit_profile_process2" width="300"/>
+</div>
+
+<div style="display: inline-block;">
+    <img src="ScreenShots/edit_profile_process3.png" alt="edit_profile_process3" width="300"/>
+    <img src="ScreenShots/edit_profile_process4.png" alt="edit_profile_process4" width="300"/>
+</div>
+

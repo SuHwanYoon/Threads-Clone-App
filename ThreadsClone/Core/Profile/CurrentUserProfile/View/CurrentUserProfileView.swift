@@ -9,7 +9,10 @@ import SwiftUI
 
 // 메인화면에서 하단 탭바에 있는 프로필 탭을 클릭했을 때 나타나는 화면입니다.
 struct CurrentUserProfileView: View {
+    // CurrentUserProfileViewModel은 현재 사용자의 프로필 정보를 관리하는 뷰모델입니다.
+    // showEditProfile은 프로필 편집 화면을 표시할지 여부를 나타내는 상태 변수입니다.
     @StateObject var viewModel = CurrentUserProfileViewModel()
+    @State private var showEditProfile = false
     
     // viewModel에서 가져오는 currentUser 프로퍼티
     private var currentUser: User? {
@@ -27,6 +30,14 @@ struct CurrentUserProfileView: View {
                     // follow 버튼
                     Button {
                         // 버튼 클릭 시 동작
+                        // 현재 프로필 편집 화면을 토글합니다.
+                        // 토글한다는것은 현재 상태를 반전시킨다는 의미입니다.
+                        // .toggle() 메서드는 Bool 타입내장 메서드 이며 Bool 값을 반전시킵니다.
+                        // showEditProfile이 true면 false로,
+                        // false면 true로 변경됩니다.
+                        // showEditProfile이 true면 편집 화면이 나타나고,
+                        // false면 편집 화면이 사라집니다.
+                        showEditProfile.toggle()
                     } label: {
                         // CurrentUserProfileView의 Edit Profile 버튼
                         // overlay는 뷰를 겹쳐서 표시하는 것
@@ -51,7 +62,20 @@ struct CurrentUserProfileView: View {
                 }
                 
             }
+            .sheet(isPresented: $showEditProfile, content: {
+                // .sheet는 모달 시트를 표시하는 데 사용됩니다.
+                // isPresented는 모달 시트를 표시할지 여부를 결정하는 바인딩 변수입니다.
+                // $showEditProfile은 showEditProfile 상태 변수를 바인딩합니다
+                // content는 모달 시트의 내용을 정의합니다.
+                // 여기서는 EditProfileView를 표시합니다.
+                // showEditProfile이 true일 때 EditProfileView를 표시합니다.
+                // .environmentObject는 뷰 모델을 환경 객체로 주입합니다.
+                // viewModel은 CurrentUserProfileViewModel의 인스턴스입니다.
+                EditProfileView()
+                    .environmentObject(viewModel)
+            })
             .toolbar{
+                // .toolbar는 내비게이션 바에 툴바를 추가하는 데 사용됩니다.
                 // ToolbarItem은 툴바에 아이템을 추가하는 것입니다.
                 // placement는 아이템이 툴바의 어느 위치에 배치될지를 정의합니다.
                 // topBarTrailing은 툴바의 오른쪽 상단에 배치됩니다.
