@@ -84,5 +84,22 @@ class UserService {
     func reset() {
         self.currentUser = nil
     }
+    
+    // withImageUrl은 외부 파라미터, imageUrl은 내부 파라미터입니다.
+    @MainActor
+    func updateUserProfileImage(withImageUrl imageUrl: String) async throws {
+        // 현재 로그인된 사용자의 UID를 가져옵니다.
+        // Auth.auth().currentUser?.uid를 사용하여 현재 로그인된 사용자의 UID를
+        // 가져옵니다. 만약 현재 사용자가 로그인되어 있지 않다면, 이 메서드는 아무 작업도 수행하지 않습니다.
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        // Firestore Database에 접근하여 현재 사용자의 프로필 이미지 URL을 업데이트합니다.
+        // Firestore.firestore()를 사용하여 Firestore Database에 접근하고,
+        // collection("users")를 통해 "users" 컬렉션을 선택합니다.
+        // document(currentUid)를 사용하여 현재 사용자의 UID에 해당하는 문서를 선택합니다.
+        // updateData(["profileImageUrl": imageUrl])를 사용하여 프로필 이미지 URL을 업데이트합니다.
+        try await Firestore.firestore().collection("users").document(currentUid).updateData(["profileImageUrl": imageUrl])
+        // 현재 사용자의 프로필 이미지 URL을 업데이트합니다.
+        self.currentUser?.profileImageUrl = imageUrl
+    }
 }
 
