@@ -18,7 +18,7 @@ struct EditProfileView: View {
     @State private var link: String = ""
     @State private var isPrivateProfile: Bool = false
     @Environment(\.dismiss) private var dismiss
-    @EnvironmentObject private var viewModel: CurrentUserProfileViewModel
+    @StateObject var viewModel = EditProfileViewModel()
     
     var body: some View {
         NavigationStack {
@@ -150,6 +150,11 @@ struct EditProfileView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done") {
                         // 취소 버튼을 눌렀을 때의 동작을 여기에 추가합니다.
+                        // 프로필 정보를 업데이트한 후 현재 뷰를 닫습니다.
+                        Task{
+                            try await viewModel.updateUserData()
+                            dismiss()
+                        }
                     }
                     .font(.subheadline)
                     .fontWeight(.semibold)

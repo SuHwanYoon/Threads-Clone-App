@@ -22,7 +22,7 @@ struct RegistrationView: View {
         VStack {
             Spacer()
 
-            Image("clone-icon")
+            Image("inapp-icon-white2")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 120, height: 120)
