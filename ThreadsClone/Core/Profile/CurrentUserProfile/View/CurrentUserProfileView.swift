@@ -14,7 +14,7 @@ struct CurrentUserProfileView: View {
     @StateObject var viewModel = CurrentUserProfileViewModel()
     @State private var showEditProfile = false
     
-    // viewModel에서 가져오는 currentUser 프로퍼티
+    // viewModel에서 가져오는 User타입의 currentUser 프로퍼티 선언
     private var currentUser: User? {
         // 현재 로그인된 사용자의 정보를 가져옵니다.
         return viewModel.currentUser
@@ -71,8 +71,10 @@ struct CurrentUserProfileView: View {
                 // showEditProfile이 true일 때 EditProfileView를 표시합니다.
                 // .environmentObject는 뷰 모델을 환경 객체로 주입합니다.
                 // viewModel은 CurrentUserProfileViewModel의 인스턴스입니다.
-                EditProfileView()
-                    .environmentObject(viewModel)
+                if let user = currentUser {
+                    EditProfileView(user: user)
+                        .environmentObject(viewModel)
+                }
             })
             .toolbar{
                 // .toolbar는 내비게이션 바에 툴바를 추가하는 데 사용됩니다.

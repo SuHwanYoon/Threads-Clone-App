@@ -101,3 +101,13 @@
     <img src="ScreenShots/edit_profile_process4.png" alt="edit_profile_process4" width="300"/>
 </div>
 
+<div style="display: inline-block;">
+    <img src="ScreenShots/edit_profile_process6.png" alt="edit_profile_process6" width="300"/>
+        <img src="ScreenShots/explore_view_profileimage.png" alt="explore_view_profileimage" width="300"/>
+</div>
+
+
+<div style="display: inline-block;">
+    <img src="ScreenShots/edit_profile_process_firebase1.png" alt="edit_profile_process_firebase1" />
+    <img src="ScreenShots/edit_profile_process_firebase2.png" alt="edit_profile_process_firebase2" />
+</div>

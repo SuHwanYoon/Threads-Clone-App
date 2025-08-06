@@ -19,7 +19,7 @@ struct CreateThreadsView: View {
             // 프로필 Hstack과 스레드 입력 필드를 포함하는 VStack을 사용합니다.
             VStack {
                 HStack(alignment: .top) {
-                    CircularProfileImageView()
+                    CircularProfileImageView(user: nil)
 
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Yoon Suhwan")
