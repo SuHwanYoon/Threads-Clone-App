@@ -66,7 +66,8 @@ struct ProfileHeaderView: View {
             // Spacer()로 인해 HStack의 요소들 사이에 빈 공간이 생김
             Spacer()
             
-            CircularProfileImageView()
+            CircularProfileImageView(user: user, size: .medium)
+            
             
         }
     }

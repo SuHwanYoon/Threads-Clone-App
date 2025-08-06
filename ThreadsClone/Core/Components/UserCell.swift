@@ -18,7 +18,8 @@ struct UserCell: View {
     var body: some View {
         HStack {
             // 프로필 사진
-            CircularProfileImageView()
+            CircularProfileImageView(user: user)
+                
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(user.username)

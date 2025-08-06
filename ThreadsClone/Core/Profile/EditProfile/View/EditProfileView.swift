@@ -9,11 +9,13 @@ import SwiftUI
 import PhotosUI
 
 struct EditProfileView: View {
+    // User 객체 주입
     // bio, link 텍스트 필드의 상태를 관리하기 위한 @State 변수를 선언합니다.
     // Toggle의 상태를 관리하기 위한 @State 변수입니다.
     // @Environment(\.dismiss)은 현재 뷰를 닫는 기능을 제공합니다.
     // CurrentUserProfileViewModel로 현재사용정보를 업데이트하고
     // 프로필 사진을 선택하는 기능을 제공합니다.
+    let user: User
     @State private var bio: String = ""
     @State private var link: String = ""
     @State private var isPrivateProfile: Bool = false
@@ -37,7 +39,7 @@ struct EditProfileView: View {
                             Text("Name")
                                 .fontWeight(.semibold)
                             
-                            Text("Yoon Suhwan")
+                            Text(user.fullname)
                         }
                         // Spacer()로 Vstack과 프로필 사진 사이에 빈 공간을 만듭니다.
                         Spacer()
@@ -59,7 +61,7 @@ struct EditProfileView: View {
                                     .clipShape(Circle())
                             }else{
                                 // CircularProfileImageView는 원형 프로필 이미지를 표시하는 뷰입니다.
-                                CircularProfileImageView()
+                                CircularProfileImageView(user: user)
                                 
                             }
                             
@@ -165,6 +167,17 @@ struct EditProfileView: View {
     }
 }
 
-#Preview {
-    EditProfileView()
+// PreviewProvider는 SwiftUI에서 미리보기를 제공하는 구조체입니다.
+// EditProfileView의 미리보기를 제공합니다.
+struct EditProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        // EditProfileView를 미리보기로 설정합니다.
+        // User 객체를 dev.user로 초기화하여 미리보기에서 사용할 수 있도록 합니다.
+        EditProfileView(user: dev.user)
+    }
 }
+
+
+//#Preview {
+//    EditProfileView()
+//}
