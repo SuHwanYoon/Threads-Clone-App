@@ -35,11 +35,8 @@ enum ProfileImageSize{
 
 // 이 이미지의 뷰는 프로필 이미지를 원형으로 표시하는 뷰입니다.
 struct CircularProfileImageView: View {
-    // 사용자 정보를 받을 수 있는 변수, 기본값은 nil
-    // 이 변수는 사용자 프로필 이미지를 표시하기 위해 사용되고
-    // 한 사용자가 여러가지 사진을 가질 수 있기 때문에
-    // var로 선언되어 있습니다.
-    var user: User?
+
+    let user: User?
     let size: ProfileImageSize
     
     // 이 구조체의 초기화 메서드입니다.

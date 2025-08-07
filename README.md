@@ -1,3 +1,9 @@
+# Tech Stack
+- **UI**: SwiftUI
+- **Backend**: Firebase (Firestore, Authentication, Storage)
+- **Architecture**: MVVM
+- **Library**: Kingfisher, Combine 
+
 # ScreenShots
 
 <div style="display: inline-block;">
@@ -111,3 +117,10 @@
     <img src="ScreenShots/edit_profile_process_firebase1.png" alt="edit_profile_process_firebase1" />
     <img src="ScreenShots/edit_profile_process_firebase2.png" alt="edit_profile_process_firebase2" />
 </div>
+
+
+## Post New Thread Feature
+<div style="display: inline-block;">
+    <img src="ScreenShots/upload_thread_process1.png" alt="upload_thread_process1" />
+</div>
+
