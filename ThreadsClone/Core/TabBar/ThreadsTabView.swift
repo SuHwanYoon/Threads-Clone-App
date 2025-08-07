@@ -109,7 +109,7 @@ struct ThreadsTabView: View {
         // isPresented는 모달 시트가 표시될 때 true로 설정되고,
         // onDismiss는 시트가 닫힐 때 실행되는 동작
         // 사용자가 시트를 닫으면 selectedTab을 0으로 설정되며 첫 번째 탭(홈탭)을 표시.
-        // content는 모달 시트에 표시될 실제 뷰이고 createThreadsView를 모달로 표시
+        // content는 모달 시트에 표시될 실제 뷰이고 createThreadsView()를 모달로 표시
         .sheet(
             isPresented: $showCreateThreadsView,
             onDismiss: { selectedTab = 0 },
