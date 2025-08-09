@@ -78,6 +78,23 @@ class UserService {
         return users.filter { $0.id != currentUid }
     }
     
+    // User객체 하나를 반환하는 fetchUser 메서드는 Firestore에서 특정 사용자의 정보를 가져오는 기능을 제공합니다.
+    static func fetchUser(withUid uid: String) async throws -> User? {
+        
+        // Firestore에서 현재 사용자의 문서를 가져옵니다.
+        // Firestore.firestore()를 사용하여 Firestore Database에 접근하고, collection("users")를 통해 "users" 컬렉션을 선택합니다.
+        // document(uid)를 사용하여 현재 사용자의 UID에 해당하는 문서를 선택합니다.
+        // await를 사용하여 데이터 조회가 완료될 때까지 기다립니다.
+        let snapshot = try await Firestore.firestore().collection("users").document(uid).getDocument()
+        
+        // snapshot.data(as: User.self)를 사용하여 Firestore에서 가져온 문서를 User 모델로 변환합니다.
+        // 이 메서드는 Firestore에서 가져온 데이터를 User 모델로 디코딩합니다
+        // 만약 문서가 존재하지 않거나 데이터가 User 모델로 변환되지 않는 경우, currentUser는 nil이 됩니다.
+        return try snapshot.data(as: User.self)
+
+    }
+    
+    
     // func reset
     // 이 메서드는 현재 사용자의 정보를 초기화하는 기능을 제공합니다.
     // 현재 사용자의 정보를 nil로 설정하여 사용자 세션을 초기화합니다.

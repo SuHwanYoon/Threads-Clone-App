@@ -26,6 +26,6 @@ struct Thread: Identifiable, Codable {
         // 스레드 ID가 nil인 경우  새로운 UUID를 생성하여 반환합니다.
         return threadId ?? NSUUID().uuidString
     }
-    
-    var user: User? // 스레드를 작성한 사용자의 정보를 포함하는 선택적 속성입니다.
+    // 스레드를 작성한 사용자의 정보에 접근하기 위한 선택적 속성입니다.
+    var user: User?
 }
