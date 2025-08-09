@@ -33,7 +33,7 @@ struct CreateThreadsView: View {
                     CircularProfileImageView(user: user)
 
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Yoon Suhwan")
+                        Text(user?.username ?? "")
                             .fontWeight(.semibold)
                         // 스레드입력 필드
                         // axis: .vertical을 사용하여 여러 줄 입력이 가능하도록 설정합니다.

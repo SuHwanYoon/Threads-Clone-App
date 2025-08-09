@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ThreadCell: View {
+    // ThreadCell에 Thread 모델을 개체 주입
+    let thread: Thread
+    
     var body: some View {
         VStack {
             // HStack는 수평으로 배치하는 뷰
@@ -16,7 +19,8 @@ struct ThreadCell: View {
                 // frame은 이미지의 크기를 지정하는 것
                 // clipShape은 이미지를 자르는 것
                 // Circle()은 원형으로 자르는 것
-                CircularProfileImageView(user: nil)
+                CircularProfileImageView(user: thread.user, size: .small)
+                    
                     
                 // .leading은 왼쪽 정렬
                 // .top은 위쪽 정렬
@@ -28,7 +32,7 @@ struct ThreadCell: View {
 
                     // 프로필 이름
                     HStack {
-                        Text("Yoon")
+                        Text(thread.user?.username ?? "")
                             .font(.footnote)
                             .fontWeight(.semibold)
                         // Spacer()는 빈 공간을 채우는 것
@@ -49,7 +53,7 @@ struct ThreadCell: View {
 
                     }
 
-                    Text("Developer")
+                    Text(thread.caption)
                         .font(.footnote)
                         .multilineTextAlignment(.leading)
 
@@ -97,6 +101,14 @@ struct ThreadCell: View {
     }
 }
 
-#Preview {
-    ThreadCell()
+// PreviewProvider로 ThreadCell의 미리보기를 제공합니다.
+struct ThreadCell_Previews: PreviewProvider {
+    static var previews: some View {
+        ThreadCell(thread: dev.thread)
+    }
 }
+
+//#Preview {
+//    ThreadCell()
+//}
+

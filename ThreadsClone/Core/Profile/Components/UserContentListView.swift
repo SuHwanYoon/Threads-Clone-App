@@ -74,7 +74,7 @@ struct UserContentListView: View {
             // LazyVStack은 스크롤이 필요할 때만 뷰를 생성하는 것입니다.
             LazyVStack {
                 ForEach(0...10, id: \.self) { thread in
-                    ThreadCell()
+//                    ThreadCell(thread: nil)
                 }
             }
         }
