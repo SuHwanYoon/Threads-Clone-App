@@ -129,3 +129,14 @@
     <img src="ScreenShots/feching_user_thread_document_process1.png" alt="feching_user_thread_document_process1" />
 </div>
 
+## Navigation from navigation view to profile view of user touched
+<div style="display: inline-block;">
+    <img src="ScreenShots/navigate_from_expore_to_profile1.png" alt="navigate_from_expore_to_profile1" />
+    <img src="ScreenShots/navigate_from_expore_to_profile2.png" alt="navigate_from_expore_to_profile2" />
+</div>
+
+## Scroll Down Refresh Feature in Feed View
+<div style="display: inline-block;">
+    <img src="ScreenShots/scroll-down-refresh1.png" alt="scroll-down-refresh1" />
+    <img src="ScreenShots/scroll-down-refresh2.png" alt="scroll-down-refresh2" />
+</div>

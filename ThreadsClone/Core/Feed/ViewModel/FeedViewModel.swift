@@ -19,8 +19,8 @@ class FeedViewModel: ObservableObject {
     }
     
     // fetchThreads 메서드는 FeedViewModel이 초기화될 때 호출되어
-    // self.threads 배열에 스레드 데이터를 비동기적으로 가져오고
-    // fetchUserDataForThreads 메서드를 호출하여 각 스레드의 사용자 데이터를 가져옵니다.
+    // self.threads 배열에 스레드 배열을 가져오고
+    // fetchUserDataForThreads 메서드를 호출하여 각 스레드에 대한 User정보를 가죠옵니다
     func fetchThreads() async throws {
         self.threads = try await ThreadService.fetchThreads()
         try await fetchUserDataForThreads()

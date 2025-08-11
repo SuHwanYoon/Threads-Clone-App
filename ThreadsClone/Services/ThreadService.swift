@@ -38,5 +38,31 @@ struct ThreadService {
         // 따라서 최종적으로 [Thread] 타입의 배열을 반환합니다.
         return snapshot.documents.compactMap { try? $0.data(as: Thread.self) }
     }
+    
+    // 특정 사용자의 스레드를 최신순으로 Thread객체의 배열을 반환합니다.
+    static func fetchUserThreads(uid: String) async throws -> [Thread] {
+        // Firestore에서 "threads" 컬렉션을 가져오고, "ownerUid
+        // 필드를 사용하여 특정 사용자의 스레드를 필터링합니다.
+        // whereField("ownerUid", isEqualTo: uid)는
+        //"ownerUid" 필드가 Parameter로 받은 uid와 일치하는 문서만 가져옵니다.
+        // 즉 snapshot은 특정 사용자의 스레드만 포함하게 됩니다.
+        let snapshot = try await Firestore.firestore().collection("threads")
+                        .whereField("ownerUid", isEqualTo: uid)
+                        .getDocuments()
+        
+        // compactMap을 사용하여 각 문서를 Thread 객체가 담긴 배열로 변환
+        // try?를 사용하여 변환이 실패할 경우 nil을 반환하고, compactMap을 사용하여 Thread타입객체로 변화하지 못해 nil로 반환된 값을 제외합니다.
+        // 따라서 최종적으로 [Thread] 타입의 배열을 반환합니다.
+        let threads = snapshot.documents.compactMap  { try? $0.data(as: Thread.self) }
+        
+        // 스레드 배열을 최신순으로 정렬하여 반환합니다.
+        // timestamp.dateValue()를 사용하여 Timestamp타입 프로로퍼티를 Date 타입으로 변환
+        // 변환하는 이유는 Timestamp는 Firebase에서 제공하는 날짜 및 시간 정보를 나타내며,
+        // Date 타입은 Swift의 날짜 및 시간 정보를 나타내는 기본 타입이기때문에
+        // Swift에서 비교하기위해 Date 타입으로 변환해야 합니다.
+        // 이를 기준으로 내림차순으로 정렬합니다.
+        // 따라서 최신 스레드가 배열의 첫 번째 요소가 됩니다.
+        return threads.sorted(by: { $0.timestamp.dateValue() > $1.timestamp.dateValue() })
+    }
 }
 
