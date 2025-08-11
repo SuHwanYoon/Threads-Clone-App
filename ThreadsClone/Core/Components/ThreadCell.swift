@@ -38,8 +38,8 @@ struct ThreadCell: View {
                         // Spacer()는 빈 공간을 채우는 것
                         // Spacer()로 인해 HStack의 요소들 사이에 빈 공간이 생김
                         Spacer()
-
-                        Text("10m")
+                        // 프로필 사진 아래에 위치하는 시간
+                        Text(thread.timestamp.timestampString())
                             .font(.caption)
                             .foregroundColor(Color(.systemGray3))
 

@@ -49,9 +49,9 @@ struct ProfileView: View {
                         .cornerRadius(8)
                 }
                 
-                // UserContentListView는 사용자 콘텐츠 목록을 표시하는 뷰입니다.
+                // UserContentListView는 해당 유저의 thread를 표시하는 뷰입니다.
                 // Components로 분리된 UserContentListView를 사용합니다.
-                UserContentListView()
+                UserContentListView(user: user)
             }
             
         }

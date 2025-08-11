@@ -35,11 +35,8 @@ struct FeedView: View {
             .refreshable {
                 // 사용자가 스크롤을 내려 새로고침을 할 때 실행되는 코드
                 // 실제로는 서버에서 데이터를 가져오는 등의 작업을 수행할 수 있습니다.
-                // 여기서는 단순히 디버깅을 위한 메시지를 출력합니다.
-                // print는 콘솔에 메시지를 출력하는 함수입니다.
-                // DEBUG: Refreshing threads... 메시지를 콘솔에 출력
-                // 이 메시지는 새로고침이 실행될 때마다 출력됩니다.
-                print("DEBUG: Refreshing threads...")
+                Task { try await viewModel.fetchThreads() }
+//                print("새로고침 완료")
             }
             .navigationTitle("Threads")  // 네비게이션 바의 제목을 설정
             .navigationBarTitleDisplayMode(.inline)  // 네비게이션 바의 제목 표시 모드를 설정

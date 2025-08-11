@@ -11,6 +11,8 @@ import SwiftUI
 // 이 뷰는 프로필의 스레드, 좋아요, 북마크 등의 콘텐츠를 표시합니다.
 // ProfileView, CurrentUserProfileView에서 사용됩니다.
 struct UserContentListView: View {
+    // 외부주입값 기반 viewModel선언 아래에서 초기화
+    @StateObject var viewModel: UserContentListViewModel
     // selectedFilter는 현재 선택된 필터를 나타냅니다.
     // Threads탭이 선택되었을때의 상태를 나타냅니다.
     // @Namespace는 뷰간의 애니메이션 전환을 위한 프로퍼티 래퍼
@@ -26,6 +28,17 @@ struct UserContentListView: View {
         let count = CGFloat(ProfileThreadFilter.allCases.count)
         return (UIScreen.main.bounds.width) / count - 16
     }
+    
+    // UserContentListView를 초기화할 때 User 객체를 주입받습니다.
+    // 이 메서드는 UserContentListViewModel을 초기화하고 상태 객체로 설정합니다.
+    // @StateObject는 뷰 모델을 상태 객체로 선언합니다.
+    // view가 열리면 아래의 init 메서드가 호출되어 _viewModel이 초기화됩니다.
+    init(user: User){
+        // _viewModel로 UserContentListViewModel 객체의 값이 아닌 객체 자체에 접근
+        self._viewModel = StateObject(wrappedValue: UserContentListViewModel(user: user))
+    }
+    
+    
     var body: some View {
         VStack {
             HStack {
@@ -73,8 +86,8 @@ struct UserContentListView: View {
             }
             // LazyVStack은 스크롤이 필요할 때만 뷰를 생성하는 것입니다.
             LazyVStack {
-                ForEach(0...10, id: \.self) { thread in
-//                    ThreadCell(thread: nil)
+                ForEach(viewModel.threads) { thread in
+                    ThreadCell(thread: thread)
                 }
             }
         }
@@ -83,6 +96,14 @@ struct UserContentListView: View {
     }
 }
 
-#Preview {
-    UserContentListView()
+struct UserContentListView_Previews: PreviewProvider {
+    static var previews: some View {
+        // UserContentListView의 미리보기를 위한 프리뷰
+        // User 객체를 주입하여 미리보기 생성
+        UserContentListView(user: dev.user)
+    }
 }
+
+//#Preview {
+//    UserContentListView(user: <#User#>)
+//}

@@ -58,7 +58,9 @@ struct CurrentUserProfileView: View {
                     }
                     // UserContentListView는 사용자 콘텐츠 목록을 표시하는 뷰입니다.
                     // Components로 분리된 UserContentListView를 사용합니다.
-                    UserContentListView()
+                    if let user = currentUser {
+                        UserContentListView(user: user)
+                    }
                 }
                 
             }
