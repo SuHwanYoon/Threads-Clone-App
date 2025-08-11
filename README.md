@@ -131,12 +131,12 @@
 
 ## Navigation from navigation view to profile view of user touched
 <div style="display: inline-block;">
-    <img src="ScreenShots/navigate_from_expore_to_profile1.png" alt="navigate_from_expore_to_profile1" />
-    <img src="ScreenShots/navigate_from_expore_to_profile2.png" alt="navigate_from_expore_to_profile2" />
+    <img src="ScreenShots/navigate_from_expore_to_profile1.png" alt="navigate_from_expore_to_profile1" width="300"/>
+    <img src="ScreenShots/navigate_from_expore_to_profile2.png" alt="navigate_from_expore_to_profile2" width="300"/>
 </div>
 
 ## Scroll Down Refresh Feature in Feed View
 <div style="display: inline-block;">
-    <img src="ScreenShots/scroll-down-refresh1.png" alt="scroll-down-refresh1" />
-    <img src="ScreenShots/scroll-down-refresh2.png" alt="scroll-down-refresh2" />
+    <img src="ScreenShots/scroll-down-refresh1.png" alt="scroll-down-refresh1" width="300"/>
+    <img src="ScreenShots/scroll-down-refresh2.png" alt="scroll-down-refresh2" width="300"/>
 </div>
