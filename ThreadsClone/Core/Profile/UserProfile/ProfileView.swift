@@ -48,6 +48,7 @@ struct ProfileView: View {
                         .background(.black)
                         .cornerRadius(8)
                 }
+                .hidden()
                 
                 // UserContentListView는 해당 유저의 thread를 표시하는 뷰입니다.
                 // Components로 분리된 UserContentListView를 사용합니다.

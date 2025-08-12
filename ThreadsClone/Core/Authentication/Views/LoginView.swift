@@ -35,11 +35,11 @@ struct LoginView: View {
 
                 VStack {
                     // email 필드
-                    TextField("Enter Email", text: $viewModel.email)
+                    TextField("이메일", text: $viewModel.email)
                         .autocapitalization(.none)
                         .modifier(TextFiledModifier())
                     // password 필드
-                    SecureField("Enter Password", text: $viewModel.password)
+                    SecureField("패스워드", text: $viewModel.password)
                         .modifier(TextFiledModifier())
 
                 }
@@ -59,13 +59,14 @@ struct LoginView: View {
                         .foregroundColor(.black)
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
+                .hidden()
 
                 Button {
                     // Task는 Swift Concurrency에서 비동기 작업을 나타내는 구조체입니다.
                     // await로 비동기 작업이 완료될 때까지 기다림
                     Task {try await viewModel.login() }
                 } label: {
-                    Text("Login")
+                    Text("로그인")
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
@@ -86,9 +87,9 @@ struct LoginView: View {
                         .navigationBarBackButtonHidden(true)
                 } label: {
                     HStack(spacing: 3) {
-                        Text("Don't have an account?")
+                        Text("계정이 없습니까?")
 
-                        Text("Sign Up")
+                        Text("계정등록")
                             .fontWeight(.semibold)
 
                     }

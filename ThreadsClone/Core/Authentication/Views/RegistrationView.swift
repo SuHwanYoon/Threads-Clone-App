@@ -50,7 +50,7 @@ struct RegistrationView: View {
                 // viewModel.createUser() 메서드를 호출하여 사용자를 생성합니다.
                 Task { try await viewModel.createUser()}
             } label: {
-                Text("Sign Up")
+                Text("회원가입")
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
@@ -70,9 +70,9 @@ struct RegistrationView: View {
                 dismiss()
             } label: {
                 HStack(spacing: 3) {
-                    Text("Already have an account?")
+                    Text("이미 계정이 있습니까?")
 
-                    Text("Sign In")
+                    Text("로그인하러 가기")
                         .fontWeight(.semibold)
 
                 }

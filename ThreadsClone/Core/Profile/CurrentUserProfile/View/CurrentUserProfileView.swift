@@ -44,7 +44,7 @@ struct CurrentUserProfileView: View {
                         // RoundedRectangle은 둥근 사각형을 만드는 것
                         // stroke는 테두리를 만드는 것
                         // lineWidth는 테두리의 두께를 설정하는 것
-                        Text("Edit Profile")
+                        Text("프로필 수정")
                             .font(.subheadline)
                             .fontWeight(.semibold)
                             .foregroundColor(.black)
@@ -83,13 +83,16 @@ struct CurrentUserProfileView: View {
                 // ToolbarItem은 툴바에 아이템을 추가하는 것입니다.
                 // placement는 아이템이 툴바의 어느 위치에 배치될지를 정의합니다.
                 // topBarTrailing은 툴바의 오른쪽 상단에 배치됩니다.
-                // 우측 상단에 로그아웃되는 메뉴 버튼을 추가합니다.
+                // 우측 상단에 톱니바퀴모양의 설정 버튼을 추가
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        AuthService.shared.signOut()
-                    } label: {
-                        // sign out image button
-                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                    //                    Button {
+                    //                        AuthService.shared.signOut()
+                    //                    } label: {
+                    //                        // sign out image button
+                    //                        Image(systemName: "gearshape")
+                    //                    }
+                    NavigationLink(destination: SettingListView()) {
+                        Image(systemName: "gearshape")
                     }
                 }
             }
