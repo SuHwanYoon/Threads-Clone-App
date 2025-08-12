@@ -38,7 +38,7 @@ struct FeedView: View {
                 Task { try await viewModel.fetchThreads() }
 //                print("새로고침 완료")
             }
-            .navigationTitle("Threads")  // 네비게이션 바의 제목을 설정
+            .navigationTitle("오늘의 일기들")  // 네비게이션 바의 제목을 설정
             .navigationBarTitleDisplayMode(.inline)  // 네비게이션 바의 제목 표시 모드를 설정
         }
         .toolbar {

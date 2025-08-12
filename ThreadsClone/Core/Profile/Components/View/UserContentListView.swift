@@ -43,7 +43,7 @@ struct UserContentListView: View {
         VStack {
             HStack {
                 // .allCases는 열거형의 모든 케이스를 가져오는 것입니다.
-                ForEach(ProfileThreadFilter.allCases) { filter in
+                ForEach([ProfileThreadFilter.threads]) { filter in
                     VStack {
                         // filter.title은 열거형의 각 케이스에 대한 제목을 가져옵니다.
                         // selectedFilter가 filter와 같으면 선택된 필터입니다.

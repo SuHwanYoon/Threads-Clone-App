@@ -51,8 +51,9 @@ struct ExploreView: View {
             // searchable modifier는 네비게이션바 아래에 검색창을 추가.
             // 사용자가 검색창에 입력한 텍스트는 searchText 변수에 저장됩니다.
             // prompt는 검색창에 표시되는 안내 문구입니다.
-            .navigationTitle("Search")
-            .searchable(text: $searchText, prompt: "Search")
+            .navigationTitle("다른 사용자들")
+//            .searchable(text: $searchText, prompt: "Search")
+            
             
         }
     }

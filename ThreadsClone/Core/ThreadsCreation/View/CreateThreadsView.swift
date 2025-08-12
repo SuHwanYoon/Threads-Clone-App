@@ -38,7 +38,7 @@ struct CreateThreadsView: View {
                         // 스레드입력 필드
                         // axis: .vertical을 사용하여 여러 줄 입력이 가능하도록 설정합니다.
                         TextField(
-                            "Start a new thread...",
+                            "새로운 일기 입력",
                             text: $caption,
                             axis: .vertical
                         )
@@ -66,13 +66,13 @@ struct CreateThreadsView: View {
             }
             // view 전체에 padding을 적용합니다.
             .padding()
-            .navigationTitle("New Threads")
+            .navigationTitle("새로운 일기")
             .navigationBarTitleDisplayMode(.inline)
             // .toolbar를 사용하여 네비게이션 바에 버튼을 추가합니다.
             .toolbar {
                 // ToolbarItem을 사용하여 네비게이션 바에 왼쪽에는 "Cancel" 버튼
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
+                    Button("취소") {
                         // 취소 버튼을 누르면 현재 뷰를 닫습니다.
                         dismiss()
                     }
@@ -81,7 +81,7 @@ struct CreateThreadsView: View {
                 }
                 // ToolbarItem을 사용하여 네비게이션 바에 오른쪽에는 "Post" 버튼
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Post") {
+                    Button("등록") {
                         // Thread를 Post하는 동작
                         // Post 버튼을 누르면 업로드하고 현재 뷰를 닫습니다.
                         Task{

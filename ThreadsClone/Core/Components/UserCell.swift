@@ -46,6 +46,7 @@ struct UserCell: View {
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(Color(.systemGray4), lineWidth: 1)
                 }
+                .hidden()
 
         }
         .padding(.horizontal)

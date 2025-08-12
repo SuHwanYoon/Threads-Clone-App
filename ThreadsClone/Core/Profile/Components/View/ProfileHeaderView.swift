@@ -59,6 +59,7 @@ struct ProfileHeaderView: View {
                 Text("2 followers")
                     .font(.caption)
                     .foregroundColor(.gray)
+                    .hidden()
                 
             }
             

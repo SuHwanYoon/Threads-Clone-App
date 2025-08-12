@@ -11,6 +11,9 @@ struct ThreadCell: View {
     // ThreadCell에 Thread 모델을 개체 주입
     let thread: Thread
     
+    // 하트 눌림 상태 저장
+    @State private var isLiked = false
+    
     var body: some View {
         VStack {
             // HStack는 수평으로 배치하는 뷰
@@ -50,6 +53,7 @@ struct ThreadCell: View {
                             Image(systemName: "ellipsis")
                                 .foregroundColor(Color(.darkGray))
                         }
+                        .hidden()
 
                     }
 
@@ -61,28 +65,32 @@ struct ThreadCell: View {
                     // heart, comment, share, send 버튼
                     HStack(spacing: 16) {
                         Button {
-
+                            // 하트 토글
+                            isLiked.toggle()
                         } label: {
-                            Image(systemName: "heart")
+                            Image(systemName: isLiked ? "heart.fill" : "heart")
+                                .foregroundColor(isLiked ? .red : .black)
                         }
-
                         Button {
 
                         } label: {
                             Image(systemName: "bubble.left")
                         }
+                        .hidden()
 
                         Button {
 
                         } label: {
                             Image(systemName: "arrow.rectanglepath")
                         }
+                        .hidden()
 
                         Button {
 
                         } label: {
                             Image(systemName: "paperplane")
                         }
+                        .hidden()
 
                     }
                     .foregroundColor(Color(.black))

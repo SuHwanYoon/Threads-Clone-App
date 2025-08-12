@@ -46,6 +46,11 @@ struct ThreadsTabView: View {
 
             // 검색 탭
             // 검색탭은 상태변수에 따라 채우기 안채우기를 조절하지않음
+            // 돋보기 아이콘에는 magnifyingglass말고 다른모양 쓰고싶어
+            // 현재는 magnifyingglass 아이콘을 사용하고 있습니다.
+            // 다른 아이콘을 사용하고 싶다면 systemName에 해당 아이콘의 이름을 입력하면 됩니다.
+            // 예를 들어, "magnifyingglass.circle"을 사용하면 돋보기 아이
+            // 콘이 원 안에 표시됩니다.
             ExploreView()
                 .tabItem {
                     Image(
@@ -65,16 +70,16 @@ struct ThreadsTabView: View {
                 .onAppear { selectedTab = 2 }
                 .tag(2)
 
-            ActivityView()
-                .tabItem {
-                    Image(systemName: selectedTab == 3 ? "heart.fill" : "heart")
-                        .environment(
-                            \.symbolVariants,
-                            selectedTab == 3 ? .fill : .none
-                        )
-                }
-                .onAppear { selectedTab = 3 }
-                .tag(3)
+//            ActivityView()
+//                .tabItem {
+//                    Image(systemName: selectedTab == 3 ? "heart.fill" : "heart")
+//                        .environment(
+//                            \.symbolVariants,
+//                            selectedTab == 3 ? .fill : .none
+//                        )
+//                }
+//                .onAppear { selectedTab = 3 }
+//                .tag(3)
 
 //            ProfileView()
             // ProfileView대신 CurrentUserProfileView를 사용

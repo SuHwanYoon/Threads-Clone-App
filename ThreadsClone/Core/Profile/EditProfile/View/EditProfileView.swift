@@ -36,7 +36,7 @@ struct EditProfileView: View {
                     // name 과 프로필 사진을 나타내는 HStack입니다.
                     HStack {
                         VStack(alignment: .leading) {
-                            Text("Name")
+                            Text("이름")
                                 .fontWeight(.semibold)
                             
                             Text(user.fullname)
@@ -72,7 +72,7 @@ struct EditProfileView: View {
                     // bio 인물 소개를 나타내는 vstack입니다.
                     Divider()
                     VStack(alignment: .leading) {
-                        Text("Bio")
+                        Text("자기소개")
                             .fontWeight(.semibold)
                         
                         // TextField는 사용자로부터 텍스트 입력을 받는 UI 요소입니다.
@@ -80,7 +80,7 @@ struct EditProfileView: View {
                         // text는 @State로 선언된 bio 변수를 바인딩합니다.
                         // 즉, 사용자가 입력한 텍스트가 bio 변수에 저장됩니다.
                         TextField(
-                            "Introduce yourself",
+                            "자신을 소개해 보세요",
                             text: $bio,
                             axis: .vertical
                         )
@@ -89,7 +89,7 @@ struct EditProfileView: View {
                     // Link를 입력할수있는 VStack 시작
                     Divider()
                     VStack(alignment: .leading) {
-                        Text("Link")
+                        Text("링크")
                             .fontWeight(.semibold)
                         
                         // TextField는 사용자로부터 텍스트 입력을 받는 UI 요소입니다.
@@ -97,7 +97,7 @@ struct EditProfileView: View {
                         // text는 @State로 선언된 bio 변수를 바인딩합니다.
                         // 즉, 사용자가 입력한 텍스트가 bio 변수에 저장됩니다.
                         TextField(
-                            "Add Link...",
+                            "링크 주소",
                             text: $link
                         )
                     }
@@ -106,7 +106,7 @@ struct EditProfileView: View {
                     Divider()
                     // Toggle은 스위치 형태의 UI 요소로, 사용자가 켜고 끌 수 있는 기능을 제공합니다.
                     // isOn은 Toggle의 상태를 나타내는 @State 변수입니다.
-                    Toggle("Private profile", isOn: $isPrivateProfile)
+//                    Toggle("Private profile", isOn: $isPrivateProfile)
                     
                 }
                 // Vstack전체에 적용하는 modifier
@@ -132,14 +132,14 @@ struct EditProfileView: View {
             // .navigationTitle은 내비게이션 바의 제목을 설정합니다.
             // "Edit Profile"이라는 문자열이 내비게이션 바의 제목으로 표시됩니다.
             // .navigationBarTitleDisplayMode(.inline)은 내비게이션 바의 제목 표시 모드를 설정합니다.
-            .navigationTitle("Edit Profile")
+            .navigationTitle("프로필 수정")
             .navigationBarTitleDisplayMode(.inline)
             // 상단 네비게이션바에 .toolbar로 Cancel과 Done 버튼을 추가합니다.
             .toolbar {
                 // ToolbarItem은 내비게이션 바에 추가할 항목을 정의합니다.
                 // placement는 항목이 내비게이션 바의 어느 위치에 배치될지를 정의합니다.
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button("Cancel") {
+                    Button("취소") {
                         // 취소 버튼을 눌렀을 때의 동작을 여기에 추가합니다.
                         // Property로 선언된 dismiss를 호출하여 현재 뷰를 닫습니다.
                         dismiss()
@@ -150,7 +150,7 @@ struct EditProfileView: View {
                 // 2번째 ToolbarItem은 내비게이션 바의 오른쪽에 추가됩니다.
                 // 이 버튼은 "Done"이라는 텍스트를 가지고 있으며, 눌렀을 때의 동작을 정의합니다.
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Done") {
+                    Button("완료") {
                         // 취소 버튼을 눌렀을 때의 동작을 여기에 추가합니다.
                         // 프로필 정보를 업데이트한 후 현재 뷰를 닫습니다.
                         Task{
