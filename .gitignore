@@ -86,3 +86,8 @@ Threads-Clone-App.git/
 Threads-Clone-App.git.bfg-report/
 
 
+
+# YoYo AI version control directory
+.yoyo/
+
+.vscode/
