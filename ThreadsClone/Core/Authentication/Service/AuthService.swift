@@ -87,6 +87,34 @@ class AuthService{
         UserService.shared.reset()
     }
     
+    // 회원탈퇴 메서드
+    @MainActor
+    func deleteAccount() async throws {
+        // 현재 로그인된 사용자를 가져옵니다.
+        guard let user = Auth.auth().currentUser else {
+            print("Debug: 삭제할 사용자를 찾을 수 없습니다.")
+            return
+        }
+        
+        do {
+            // Firestore에서 사용자 문서를 삭제합니다.
+            try await Firestore.firestore().collection("users").document(user.uid).delete()
+            print("Debug: Firestore에서 사용자 데이터가 삭제되었습니다.")
+            
+            // Firebase Authentication에서 사용자를 삭제합니다.
+            try await user.delete()
+            print("Debug: Firebase Auth에서 사용자 계정이 삭제되었습니다.")
+            
+            // 계정 삭제 후 로그아웃을 호출하여 로컬 세션을 정리합니다.
+            self.signOut()
+            
+        } catch {
+            print("Debug: 계정 삭제 실패: \(error.localizedDescription)")
+            // 오류를 다시 던져 호출 측(ViewModel/View)에서 처리하도록 합니다.
+            throw error
+        }
+    }
+    
     
     // uploadUserData 메서드는 사용자의 프로필 데이터를 Firestore에 업로드하는 기능을 제공합니다.
     // async throws는 이 메서드가 비동기적으로 실행되며, 오류를 던질 수 있음을 나타냅니다.
