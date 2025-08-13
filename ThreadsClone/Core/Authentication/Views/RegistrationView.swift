@@ -29,17 +29,17 @@ struct RegistrationView: View {
                 .padding()
 
             VStack {
-                TextField("Enter Email", text: $viewModel.email)
+                TextField("이메일을 입력해주세요", text: $viewModel.email)
                     .autocapitalization(.none) // 이메일 입력 시 자동 대문자 변환을 방지합니다.
                     .modifier(TextFiledModifier())
                 
-                SecureField("Enter Password", text: $viewModel.password)
+                SecureField("패스워드를 입력해주세요", text: $viewModel.password)
                     .modifier(TextFiledModifier())
                 
-                TextField("Enter full name", text: $viewModel.fullname)
+                TextField("계정이름을 입력해주세요", text: $viewModel.fullname)
                     .modifier(TextFiledModifier())
                 
-                TextField("Enter username", text: $viewModel.username)
+                TextField("닉네임을 입력해주세요", text: $viewModel.username)
                     .autocapitalization(.none)
                     .modifier(TextFiledModifier())
             }

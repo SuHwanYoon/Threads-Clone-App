@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct SettingListView: View {
+    @State private var showDeleteConfirmation = false
+    @State private var deletionError: Error?
+    @State private var showErrorAlert = false
+    
     var body: some View {
         // 로그아웃, 탈퇴하기, 개인정보처리방침 메뉴를 표시하는 설정 화면입니다.
         NavigationStack {
@@ -29,6 +33,7 @@ struct SettingListView: View {
                     // 탈퇴하기 버튼
                     Button(action: {
                         // 탈퇴하기 액션
+                        showDeleteConfirmation = true
                         print("탈퇴하기")
                     }) {
                         Text("탈퇴하기")
@@ -55,6 +60,26 @@ struct SettingListView: View {
                 .navigationBarBackButtonHidden(true)
                 .navigationBarHidden(false)
                 
+            }
+            .alert("계정을 삭제하시겠습니까?", isPresented: $showDeleteConfirmation) {
+                Button("취소", role: .cancel) { }
+                Button("삭제", role: .destructive) {
+                    Task {
+                        do {
+                            try await AuthService.shared.deleteAccount()
+                        } catch {
+                            self.deletionError = error
+                            self.showErrorAlert = true
+                        }
+                    }
+                }
+            } message: {
+                Text("이 작업은 되돌릴 수 없으며, 모든 데이터가 영구적으로 삭제됩니다.")
+            }
+            .alert("오류", isPresented: $showErrorAlert) {
+                Button("확인") { }
+            } message: {
+                Text(deletionError?.localizedDescription ?? "알 수 없는 오류가 발생했습니다.")
             }
         }
     }
