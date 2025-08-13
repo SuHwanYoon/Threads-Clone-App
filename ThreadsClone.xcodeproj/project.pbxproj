@@ -35,7 +35,7 @@
 /* Begin PBXFileReference section */
 		6734B4EA2DC8AFF600B0D468 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6734B4EE2DC8B0CF00B0D468 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		676FFAE12DC86A4400B92CF6 /* ThreadsClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThreadsClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		676FFAE12DC86A4400B92CF6 /* TodayDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodayDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		676FFAEE2DC86A4500B92CF6 /* ThreadsCloneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThreadsCloneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		676FFAF82DC86A4500B92CF6 /* ThreadsCloneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThreadsCloneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -108,7 +108,7 @@
 		676FFAE22DC86A4400B92CF6 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				676FFAE12DC86A4400B92CF6 /* ThreadsClone.app */,
+				676FFAE12DC86A4400B92CF6 /* TodayDiary.app */,
 				676FFAEE2DC86A4500B92CF6 /* ThreadsCloneTests.xctest */,
 				676FFAF82DC86A4500B92CF6 /* ThreadsCloneUITests.xctest */,
 			);
@@ -118,9 +118,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		676FFAE02DC86A4400B92CF6 /* ThreadsClone */ = {
+		676FFAE02DC86A4400B92CF6 /* TodayDiary */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 676FFB022DC86A4500B92CF6 /* Build configuration list for PBXNativeTarget "ThreadsClone" */;
+			buildConfigurationList = 676FFB022DC86A4500B92CF6 /* Build configuration list for PBXNativeTarget "TodayDiary" */;
 			buildPhases = (
 				676FFADD2DC86A4400B92CF6 /* Sources */,
 				676FFADE2DC86A4400B92CF6 /* Frameworks */,
@@ -134,7 +134,7 @@
 				6734B4E02DC8AC1800B0D468 /* ScreenShots */,
 				676FFAE32DC86A4400B92CF6 /* ThreadsClone */,
 			);
-			name = ThreadsClone;
+			name = TodayDiary;
 			packageProductDependencies = (
 				67B56DB82DFFDF4D00FEE91C /* FirebaseAuth */,
 				67B56DBA2DFFDF4D00FEE91C /* FirebaseFirestore */,
@@ -142,7 +142,7 @@
 				672E751A2E4309C3001F9587 /* Kingfisher */,
 			);
 			productName = ThreadsClone;
-			productReference = 676FFAE12DC86A4400B92CF6 /* ThreadsClone.app */;
+			productReference = 676FFAE12DC86A4400B92CF6 /* TodayDiary.app */;
 			productType = "com.apple.product-type.application";
 		};
 		676FFAED2DC86A4500B92CF6 /* ThreadsCloneTests */ = {
@@ -232,7 +232,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				676FFAE02DC86A4400B92CF6 /* ThreadsClone */,
+				676FFAE02DC86A4400B92CF6 /* TodayDiary */,
 				676FFAED2DC86A4500B92CF6 /* ThreadsCloneTests */,
 				676FFAF72DC86A4500B92CF6 /* ThreadsCloneUITests */,
 			);
@@ -292,12 +292,12 @@
 /* Begin PBXTargetDependency section */
 		676FFAF02DC86A4500B92CF6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 676FFAE02DC86A4400B92CF6 /* ThreadsClone */;
+			target = 676FFAE02DC86A4400B92CF6 /* TodayDiary */;
 			targetProxy = 676FFAEF2DC86A4500B92CF6 /* PBXContainerItemProxy */;
 		};
 		676FFAFA2DC86A4500B92CF6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 676FFAE02DC86A4400B92CF6 /* ThreadsClone */;
+			target = 676FFAE02DC86A4400B92CF6 /* TodayDiary */;
 			targetProxy = 676FFAF92DC86A4500B92CF6 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -432,6 +432,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -460,6 +461,7 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -470,7 +472,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.yoon.ThreadsClone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yoon.TodayDiary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -558,7 +560,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		676FFB022DC86A4500B92CF6 /* Build configuration list for PBXNativeTarget "ThreadsClone" */ = {
+		676FFB022DC86A4500B92CF6 /* Build configuration list for PBXNativeTarget "TodayDiary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				676FFB032DC86A4500B92CF6 /* Debug */,
