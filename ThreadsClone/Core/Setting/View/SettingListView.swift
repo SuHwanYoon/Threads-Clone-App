@@ -42,6 +42,15 @@ struct SettingListView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding()
                     }
+
+                    // 문의하기
+                    Link(destination: URL(string: "https://forms.gle/YaQo2h89nZFMiB9m7")!) {
+                        Text("문의하기")
+                            .font(.headline)
+                            .foregroundColor(.blue)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
+                    }
                     
                     // 개인정보처리방침 링크
                     Link(destination: URL(string: "https://doc-hosting.flycricket.io/oneulyiilgi-gaeinjeongboceorijeongcaeg/b05dec6e-5211-4c49-a5e6-22f76564673b/privacy")!) {
