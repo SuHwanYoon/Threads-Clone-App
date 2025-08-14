@@ -60,6 +60,13 @@ struct SettingListView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding()
                     }
+                    
+                    // 개발자 이메일
+                    Text("개발자 Email: suhwan6@gmail.com")
+                        .font(.footnote)
+                        .foregroundColor(.gray)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 40)
                 }
                 .padding()
                 .frame(maxWidth: .infinity)
