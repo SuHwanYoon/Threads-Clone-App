@@ -29,7 +29,7 @@ enum ProfileThreadFilter: Int, CaseIterable, Identifiable {
     var title: String {
         switch self {
         case .threads:
-            return "작성글"
+            return "나의 일기"
         case .replies:
             return "답글"
         }
