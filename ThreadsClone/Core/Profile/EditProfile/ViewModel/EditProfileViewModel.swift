@@ -1,18 +1,11 @@
-//
-//  EditProfileViewModel.swift
-//  ThreadsClone
-//
-//  Created by YOON on 8/5/25.
-//
-
 import SwiftUI
 import PhotosUI
 
 class EditProfileViewModel: ObservableObject {
-
+    
     // PhotosPickerItem은 사용자가 선택한 사진이나 비디오를 나타내는 타입입니다.
     // Image는 SwiftUI에서 이미지를 나타내는 타입입니다.
-   
+    
     @Published var selectedItem: PhotosPickerItem?{
         // didSet으로인해 selectedItem이 변경될 때마다
         // 즉 유저가 사진을 선택할 때마다
@@ -28,17 +21,33 @@ class EditProfileViewModel: ObservableObject {
         }
     }
     @Published var profileImage: Image?
+    // bio를 Published 프로퍼티로 선언하여 View와 바인딩합니다.
+    @Published var bio = ""
+    
     // uiImage UIKit의 요소이며 실제 이미지 데이터를 가짐
     // Firebase Storage와 같은 외부 스토리지에 업로드하려면 반드시 UIImage 타입이어야 합니다.
     // SwiftUI의 Image 타입은 UIImage나 이름기반으로 이미지를 표시하는 데 사용되지만,
     // Firebase Storage에 이미지를 업로드하려면 UIImage 타입이 필요합니다.
     private var uiImage: UIImage?
+    // 현재 사용자 정보를 저장하기 위한 프로퍼티입니다.
+    private let user: User
+    
+    // user 객체를 받아 viewModel을 초기화합니다.
+    init(user: User) {
+        self.user = user
+        // 사용자의 기존 bio 정보를 bio 프로퍼티에 할당합니다.
+        if let bio = user.bio {
+            self.bio = bio
+        }
+    }
     
     // updateUserData 메서드는 사용자의 프로필 데이터를 업데이트하는 함수들의 묶음
     // 현재는 updateProfileImage 메서드만 포함되어 있지만,
     // 추후에 다른 프로필 관련 업데이트 메서드를 추가할 수 있습니다.
     func updateUserData() async throws {
+        // 프로필 이미지와 바이오 정보를 순차적으로 업데이트합니다.
         try await updateProfileImage()
+        try await updateBio()
     }
     
     // loadImage 메서드는 사용자가 선택한 사진을 비동기적으로 로드합니다
@@ -77,5 +86,13 @@ class EditProfileViewModel: ObservableObject {
         try await UserService.shared.updateUserProfileImage(withImageUrl: imageUrl)
     }
     
+    // MARK: - Bio Update
     
+    // 이 함수는 사용자의 바이오 정보를 업데이트합니다.
+    private func updateBio() async throws {
+        // bio가 비어있지 않고, 기존의 bio와 다른 경우에만 업데이트를 수행합니다.
+        if !bio.isEmpty && user.bio != bio {
+            try await UserService.shared.updateUserBio(bio)
+        }
+    }
 }

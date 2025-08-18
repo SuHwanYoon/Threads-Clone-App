@@ -118,5 +118,19 @@ class UserService {
         // 현재 사용자의 프로필 이미지 URL을 업데이트합니다.
         self.currentUser?.profileImageUrl = imageUrl
     }
+    
+    // MARK: - Bio Update
+    
+    // 이 함수는 사용자의 바이오 정보를 Firestore에서 업데이트합니다.
+    // bio 파라미터로 새로운 바이오 문자열을 받습니다.
+    @MainActor
+    func updateUserBio(_ bio: String) async throws {
+        // 현재 로그인된 사용자의 UID를 가져옵니다.
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        // Firestore의 "users" 컬렉션에서 현재 사용자의 문서를 찾아 "bio" 필드를 업데이트합니다.
+        try await Firestore.firestore().collection("users").document(currentUid).updateData(["bio": bio])
+        // 로컬 currentUser 객체의 bio 정보도 업데이트하여 UI에 즉시 반영되도록 합니다.
+        self.currentUser?.bio = bio
+    }
 }
 
