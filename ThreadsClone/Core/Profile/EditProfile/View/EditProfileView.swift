@@ -1,10 +1,3 @@
-//
-//  EditProfileView.swift
-//  ThreadsClone
-//
-//  Created by YOON on 5/24/25.
-//
-
 import SwiftUI
 import PhotosUI
 
@@ -16,11 +9,17 @@ struct EditProfileView: View {
     // CurrentUserProfileViewModel로 현재사용정보를 업데이트하고
     // 프로필 사진을 선택하는 기능을 제공합니다.
     let user: User
-    @State private var bio: String = ""
     @State private var link: String = ""
     @State private var isPrivateProfile: Bool = false
     @Environment(\.dismiss) private var dismiss
-    @StateObject var viewModel = EditProfileViewModel()
+    // viewModel을 @StateObject로 선언하여 View의 생명주기를 따르도록 합니다.
+    @StateObject private var viewModel: EditProfileViewModel
+    
+    // user 객체를 받아 View를 초기화하고, viewModel도 함께 초기화합니다.
+    init(user: User) {
+        self.user = user
+        self._viewModel = StateObject(wrappedValue: EditProfileViewModel(user: user))
+    }
     
     var body: some View {
         NavigationStack {
@@ -77,36 +76,35 @@ struct EditProfileView: View {
                         
                         // TextField는 사용자로부터 텍스트 입력을 받는 UI 요소입니다.
                         // axis: .vertical로 인해 여러 줄 입력이 가능하고 텍스트가 자동으로 줄바꿈됩니다.
-                        // text는 @State로 선언된 bio 변수를 바인딩합니다.
-                        // 즉, 사용자가 입력한 텍스트가 bio 변수에 저장됩니다.
+                        // text는 viewModel의 bio 프로퍼티와 바인딩됩니다.
                         TextField(
                             "자신을 소개해 보세요",
-                            text: $bio,
+                            text: $viewModel.bio,
                             axis: .vertical
                         )
                     }
                     
                     // Link를 입력할수있는 VStack 시작
-                    Divider()
-                    VStack(alignment: .leading) {
-                        Text("링크")
-                            .fontWeight(.semibold)
-                        
-                        // TextField는 사용자로부터 텍스트 입력을 받는 UI 요소입니다.
-                        // axis: .vertical로 인해 여러 줄 입력이 가능하고 텍스트가 자동으로 줄바꿈됩니다.
-                        // text는 @State로 선언된 bio 변수를 바인딩합니다.
-                        // 즉, 사용자가 입력한 텍스트가 bio 변수에 저장됩니다.
-                        TextField(
-                            "링크 주소",
-                            text: $link
-                        )
-                    }
-                    
-                    // Toggle이 위치하는 부분
-                    Divider()
+//                    Divider()
+//                    VStack(alignment: .leading) {
+//                        Text("링크")
+//                            .fontWeight(.semibold)
+//                        
+//                        // TextField는 사용자로부터 텍스트 입력을 받는 UI 요소입니다.
+//                        // axis: .vertical로 인해 여러 줄 입력이 가능하고 텍스트가 자동으로 줄바꿈됩니다.
+//                        // text는 @State로 선언된 bio 변수를 바인딩합니다.
+//                        // 즉, 사용자가 입력한 텍스트가 bio 변수에 저장됩니다.
+//                        TextField(
+//                            "링크 주소",
+//                            text: $link
+//                        )
+//                    }
+//                    
+//                    // Toggle이 위치하는 부분
+//                    Divider()
                     // Toggle은 스위치 형태의 UI 요소로, 사용자가 켜고 끌 수 있는 기능을 제공합니다.
                     // isOn은 Toggle의 상태를 나타내는 @State 변수입니다.
-//                    Toggle("Private profile", isOn: $isPrivateProfile)
+                    // Toggle("Private profile", isOn: $isPrivateProfile)
                     
                 }
                 // Vstack전체에 적용하는 modifier
@@ -166,6 +164,7 @@ struct EditProfileView: View {
         }
     }
 }
+
 
 // PreviewProvider는 SwiftUI에서 미리보기를 제공하는 구조체입니다.
 // EditProfileView의 미리보기를 제공합니다.
