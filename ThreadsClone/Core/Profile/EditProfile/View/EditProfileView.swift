@@ -71,14 +71,14 @@ struct EditProfileView: View {
                     // bio 인물 소개를 나타내는 vstack입니다.
                     Divider()
                     VStack(alignment: .leading) {
-                        Text("자기소개")
+                        Text("나를 표현하는 단어")
                             .fontWeight(.semibold)
                         
                         // TextField는 사용자로부터 텍스트 입력을 받는 UI 요소입니다.
                         // axis: .vertical로 인해 여러 줄 입력이 가능하고 텍스트가 자동으로 줄바꿈됩니다.
                         // text는 viewModel의 bio 프로퍼티와 바인딩됩니다.
                         TextField(
-                            "자신을 소개해 보세요",
+                            "예: 취미, 특기, 기분 등등",
                             text: $viewModel.bio,
                             axis: .vertical
                         )
