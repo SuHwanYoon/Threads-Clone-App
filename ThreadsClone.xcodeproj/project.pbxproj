@@ -38,6 +38,7 @@
 		676FFAE12DC86A4400B92CF6 /* TodayDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodayDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		676FFAEE2DC86A4500B92CF6 /* ThreadsCloneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThreadsCloneTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		676FFAF82DC86A4500B92CF6 /* ThreadsCloneUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ThreadsCloneUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		67C2EB742E52E20F0088B7BD /* TodayDiary-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "TodayDiary-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -95,6 +96,7 @@
 		676FFAD82DC86A4400B92CF6 = {
 			isa = PBXGroup;
 			children = (
+				67C2EB742E52E20F0088B7BD /* TodayDiary-Info.plist */,
 				6734B4EE2DC8B0CF00B0D468 /* .gitignore */,
 				6734B4EA2DC8AFF600B0D468 /* README.md */,
 				6734B4E02DC8AC1800B0D468 /* ScreenShots */,
@@ -432,8 +434,10 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "TodayDiary-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "오늘의일기";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "프로필 사진을 변경하기 위해 사용자의 사진 앨범에 접근합니다";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -447,9 +451,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yoon.ThreadsClone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -463,8 +469,10 @@
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "TodayDiary-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "오늘의일기";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "프로필 사진을 변경하기 위해 사용자의 사진 앨범에 접근합니다";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -478,9 +486,11 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yoon.TodayDiary;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

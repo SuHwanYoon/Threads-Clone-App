@@ -47,18 +47,18 @@ struct LoginView: View {
                 // NavigationLink는 화면을 전환할 때 사용됩니다.
                 // NavigationLink는 버튼처럼 작동합니다.
                 // NavigationLink는 destination을 지정하여 화면 전환을 관리합니다.
-                NavigationLink {
-                    Text("Forgot Password")
-                } label: {
-                    Text("Forgot Password?")
-                        .font(.footnote)
-                        .fontWeight(.semibold)
-                        .padding(.vertical)
-                        .padding(.top)
-                        .padding(.trailing, 28)
-                        .foregroundColor(Color.theme.secondaryText)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                }
+//                NavigationLink {
+//                    Text("Forgot Password")
+//                } label: {
+//                    Text("Forgot Password?")
+//                        .font(.footnote)
+//                        .fontWeight(.semibold)
+//                        .padding(.vertical)
+//                        .padding(.top)
+//                        .padding(.trailing, 28)
+//                        .foregroundColor(Color.theme.secondaryText)
+//                        .frame(maxWidth: .infinity, alignment: .trailing)
+//                }
 
                 Button {
                     // Task는 Swift Concurrency에서 비동기 작업을 나타내는 구조체입니다.
