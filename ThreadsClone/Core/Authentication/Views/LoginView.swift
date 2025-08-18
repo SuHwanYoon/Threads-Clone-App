@@ -27,7 +27,7 @@ struct LoginView: View {
             VStack {
                 Spacer()
 
-                Image("inapp-icon-white2")
+                Image("login-title-image")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 120, height: 120)
