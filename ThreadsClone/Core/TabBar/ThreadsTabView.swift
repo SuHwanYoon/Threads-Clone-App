@@ -121,7 +121,7 @@ struct ThreadsTabView: View {
             content: { CreateThreadsView() }
         )
         // .tint는 하단 아이콘들의 색상을 설정합니다.
-        .tint(.black)
+        .tint(Color.theme.accent)
     }
 }
 

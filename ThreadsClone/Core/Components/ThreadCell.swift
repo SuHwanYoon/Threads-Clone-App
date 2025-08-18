@@ -23,8 +23,7 @@ struct ThreadCell: View {
                 // clipShape은 이미지를 자르는 것
                 // Circle()은 원형으로 자르는 것
                 CircularProfileImageView(user: thread.user, size: .small)
-                    
-                    
+                
                 // .leading은 왼쪽 정렬
                 // .top은 위쪽 정렬
                 // .trailing은 오른쪽 정렬
@@ -32,34 +31,35 @@ struct ThreadCell: View {
                 // .center는 가운데 정렬
                 //spacing값의 의미는  HStack의 요소들 사이의 간격
                 VStack(alignment: .leading, spacing: 4) {
-
                     // 프로필 이름
                     HStack {
                         Text(thread.user?.username ?? "")
                             .font(.footnote)
                             .fontWeight(.semibold)
+                            .foregroundColor(Color.theme.primaryText)
+                        
                         // Spacer()는 빈 공간을 채우는 것
                         // Spacer()로 인해 HStack의 요소들 사이에 빈 공간이 생김
                         Spacer()
+                        
                         // 프로필 사진 아래에 위치하는 시간
                         Text(thread.timestamp.timestampString())
                             .font(.caption)
-                            .foregroundColor(Color(.systemGray3))
+                            .foregroundColor(Color.theme.secondaryText)
 
                         // ellipsis 버튼은 점 3개 버튼
-                        Button {
-                            // 버튼 클릭 시 동작
-                        } label: {
-                            Image(systemName: "ellipsis")
-                                .foregroundColor(Color(.darkGray))
-                        }
-                        .hidden()
-
+//                        Button {
+//                            // 버튼 클릭 시 동작
+//                        } label: {
+//                            Image(systemName: "ellipsis")
+//                                .foregroundColor(Color.theme.secondaryText)
+//                        }
                     }
 
                     Text(thread.caption)
                         .font(.footnote)
                         .multilineTextAlignment(.leading)
+                        .foregroundColor(Color.theme.primaryText)
 
                     // 가로 버튼 스택
                     // heart, comment, share, send 버튼
@@ -69,40 +69,38 @@ struct ThreadCell: View {
                             isLiked.toggle()
                         } label: {
                             Image(systemName: isLiked ? "heart.fill" : "heart")
-                                .foregroundColor(isLiked ? .red : .black)
+                                .foregroundColor(isLiked ? Color.theme.accent : Color.theme.primaryText)
                         }
-                        Button {
-
-                        } label: {
-                            Image(systemName: "bubble.left")
-                        }
-                        .hidden()
-
-                        Button {
-
-                        } label: {
-                            Image(systemName: "arrow.rectanglepath")
-                        }
-                        .hidden()
-
-                        Button {
-
-                        } label: {
-                            Image(systemName: "paperplane")
-                        }
-                        .hidden()
-
+                        
+//                        Button {
+//                            // Comment action
+//                        } label: {
+//                            Image(systemName: "bubble.right")
+//                                .foregroundColor(Color.theme.primaryText)
+//                        }
+//                        
+//                        Button {
+//                            // Repost action
+//                        } label: {
+//                            Image(systemName: "arrow.rectanglepath")
+//                                .foregroundColor(Color.theme.primaryText)
+//                        }
+//                        
+//                        Button {
+//                            // Share action
+//                        } label: {
+//                            Image(systemName: "paperplane")
+//                                .foregroundColor(Color.theme.primaryText)
+//                        }
                     }
-                    .foregroundColor(Color(.black))
-                    // vertical은 위쪽요소에서 세로 방향으로 여백을 주는 것
                     .padding(.vertical, 8)
-
                 }
             }
+            
             // Divider()는 구분선을 만드는 것
             // 구분선의 색상은 시스템 회색으로 설정
             Divider()
-                
+                .padding(.horizontal)
         }
         // padding으로 전체 VStack에 여백을 줌
         .padding()
@@ -115,8 +113,3 @@ struct ThreadCell_Previews: PreviewProvider {
         ThreadCell(thread: dev.thread)
     }
 }
-
-//#Preview {
-//    ThreadCell()
-//}
-

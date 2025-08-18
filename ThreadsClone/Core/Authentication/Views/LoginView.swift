@@ -41,8 +41,8 @@ struct LoginView: View {
                     // password 필드
                     SecureField("패스워드", text: $viewModel.password)
                         .modifier(TextFiledModifier())
-
                 }
+                
                 // NavigationLink는 SwiftUI에서 화면 전환을 관리하는 데 사용되는 구조입니다.
                 // NavigationLink는 화면을 전환할 때 사용됩니다.
                 // NavigationLink는 버튼처럼 작동합니다.
@@ -55,25 +55,25 @@ struct LoginView: View {
                         .fontWeight(.semibold)
                         .padding(.vertical)
                         .padding(.top)
-                        .padding(.trailing, 20)
-                        .foregroundColor(.black)
+                        .padding(.trailing, 28)
+                        .foregroundColor(Color.theme.secondaryText)
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
-                .hidden()
 
                 Button {
                     // Task는 Swift Concurrency에서 비동기 작업을 나타내는 구조체입니다.
                     // await로 비동기 작업이 완료될 때까지 기다림
-                    Task {try await viewModel.login() }
+                    Task { try await viewModel.login() }
                 } label: {
                     Text("로그인")
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
                         .frame(width: 352, height: 44)
-                        .background(.black)
+                        .background(Color.theme.accent)
                         .cornerRadius(8)
                 }
+                .padding(.vertical)
 
                 Spacer()
 
@@ -91,19 +91,17 @@ struct LoginView: View {
 
                         Text("계정등록")
                             .fontWeight(.semibold)
-
                     }
-                    .foregroundColor(.black)
+                    .foregroundColor(Color.theme.primaryText)
                     .font(.footnote)
                 }
                 .padding(.vertical, 16)
-
             }
-
+            .background(Color.theme.background)
         }
     }
 }
 
-#Preview(traits: .fixedLayout(width: 200, height: 400)) {
+#Preview {
     LoginView()
 }

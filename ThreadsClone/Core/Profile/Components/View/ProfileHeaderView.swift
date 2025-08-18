@@ -35,32 +35,26 @@ struct ProfileHeaderView: View {
             // [프로필, 아이디] , 직업, 팔로워 수를 포함하는 VStack
             // Profile name과 나머지 요소 사이의 간격을 12로 설정합니다.
             VStack(alignment: .leading, spacing: 12) {
-                // Yoon Suhwan과 yoon_suhwan 사이의 간격을 4로 설정합니다.
                 VStack(alignment: .leading, spacing: 4) {
                     Text(user?.fullname ?? "")
-                        .font(.title)
+                        .font(.title2)
                         .fontWeight(.semibold)
+                        .foregroundColor(Color.theme.primaryText)
                     
                     Text(user?.username ?? "")
                         .font(.subheadline)
-                    
+                        .foregroundColor(Color.theme.secondaryText)
                 }
                 
-                //                            Text("Developer")
-                //                                .font(.footnote)
-                // bio 정보를 표시하는 if let
-                // if let 으로 선언하는 이유는 bio가 옵셔녈이며 nil일 수도 있기 때문
-                // bio가 nil이면 Text 뷰 자체가 표지되지 않음으로 불필요한 빈공간이 생기지 않음
-                if let bio = user?.bio {
+                if let bio = user?.bio, !bio.isEmpty {
                     Text(bio)
                         .font(.footnote)
+                        .foregroundColor(Color.theme.primaryText)
                 }
                 
-                Text("2 followers")
-                    .font(.caption)
-                    .foregroundColor(.gray)
-                    .hidden()
-                
+//                Text("2 followers")
+//                    .font(.caption)
+//                    .foregroundColor(Color.theme.secondaryText)
             }
             
             // Spacer()는 빈 공간을 채우는 것
@@ -68,20 +62,12 @@ struct ProfileHeaderView: View {
             Spacer()
             
             CircularProfileImageView(user: user, size: .medium)
-            
-            
         }
     }
 }
-
 
 struct ProfileHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileHeaderView(user: dev.user)
     }
 }
-
-
-//#Preview {
-//    ProfileHeaderView(user: <#User#>)
-//}

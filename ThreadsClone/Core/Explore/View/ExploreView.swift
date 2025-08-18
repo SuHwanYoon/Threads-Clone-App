@@ -14,7 +14,6 @@ struct ExploreView: View {
     // StateObject로 ExploreViewModel을 생성합니다.
     @StateObject var viewModel = ExploreViewModel()
     
-    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -23,19 +22,16 @@ struct ExploreView: View {
                         // NavigationLink는 사용자가 클릭할 수 있는 링크를 생성합니다.
                         // value는 네비게이션 링크가 전달할 값을 설정합니다.
                         // 여기서는 user 객체를 전달합니다.
-                        // label은 탭 가능한 UI를 정의하는 부분
-                        // label은 사용자가 클릭할 때 표시되는 내용을 정의합니다.
-                        NavigationLink(value: user, label: {
-                            VStack {
+                        NavigationLink(value: user) {
+                            VStack(spacing: 0) {
                                 //UserCell은 사용자 정보를 표시하는 뷰입니다.
                                 UserCell(user: user)
+                                    .padding(.vertical, 8)
                                 //HStack의 요소들 사이를 구분하는 선을 추가합니다.
                                 Divider()
-                                
                             }
-                        })
-                        // padding으로 여백을 주고 .vertical로 세로 여백을 줍니다.
-                        .padding(.vertical, 4)
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
             }
@@ -44,24 +40,15 @@ struct ExploreView: View {
             // 이 경우, 사용자가 UserCell을 클릭하면 ProfileView로 이동합니다.
             // User.self는 User 타입의 객체를 나타내며, navigationDestination은 해당 타입의 객체를 목적지로 설정합니다.
             // for: User.self는 User 타입의 객체를 대상으로 하는 네비게이션 링크를 설정합니다.
-            .navigationDestination(for: User.self, destination: { user in
+            .navigationDestination(for: User.self) { user in
                 ProfileView(user: user)
-            })
-            // searchable modifier를 사용하여 검색 기능을 추가합니다.
-            // searchable modifier는 네비게이션바 아래에 검색창을 추가.
-            // 사용자가 검색창에 입력한 텍스트는 searchText 변수에 저장됩니다.
-            // prompt는 검색창에 표시되는 안내 문구입니다.
+            }
             .navigationTitle("다른 사용자들")
-//            .searchable(text: $searchText, prompt: "Search")
-            
-            
+            .navigationBarTitleDisplayMode(.inline)
+            .background(Color.theme.background)
         }
     }
 }
-
-
-
-
 
 #Preview {
     ExploreView()

@@ -48,14 +48,14 @@ struct RegistrationView: View {
                 // Task는 Swift Concurrency에서 비동기 작업을 나타내는 구조체입니다.
                 // try await를 사용하여 비동기 작업을 수행합니다.
                 // viewModel.createUser() 메서드를 호출하여 사용자를 생성합니다.
-                Task { try await viewModel.createUser()}
+                Task { try await viewModel.createUser() }
             } label: {
                 Text("회원가입")
                     .font(.subheadline)
                     .fontWeight(.semibold)
                     .foregroundColor(.white)
                     .frame(width: 352, height: 44)
-                    .background(.black)
+                    .background(Color.theme.accent)
                     .cornerRadius(8)
             }
             .padding(.vertical)
@@ -63,6 +63,7 @@ struct RegistrationView: View {
             Spacer()
 
             Divider()
+            
             // 이곳에서 버튼을 사용하여 로그인 화면으로 이동합니다.
             Button {
                 // dismiss()를 호출하여 현재 뷰를 닫습니다.
@@ -74,14 +75,14 @@ struct RegistrationView: View {
 
                     Text("로그인하러 가기")
                         .fontWeight(.semibold)
-
                 }
-                .foregroundColor(.black)
+                .foregroundColor(Color.theme.primaryText)
                 .font(.footnote)
             }
             .padding(.vertical, 16)
-
         }
+        .background(Color.theme.background)
+        .ignoresSafeArea()
     }
 }
 

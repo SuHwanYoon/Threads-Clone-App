@@ -2,20 +2,12 @@ import SwiftUI
 import PhotosUI
 
 struct EditProfileView: View {
-    // User 객체 주입
-    // bio, link 텍스트 필드의 상태를 관리하기 위한 @State 변수를 선언합니다.
-    // Toggle의 상태를 관리하기 위한 @State 변수입니다.
-    // @Environment(\.dismiss)은 현재 뷰를 닫는 기능을 제공합니다.
-    // CurrentUserProfileViewModel로 현재사용정보를 업데이트하고
-    // 프로필 사진을 선택하는 기능을 제공합니다.
     let user: User
     @State private var link: String = ""
     @State private var isPrivateProfile: Bool = false
     @Environment(\.dismiss) private var dismiss
-    // viewModel을 @StateObject로 선언하여 View의 생명주기를 따르도록 합니다.
     @StateObject private var viewModel: EditProfileViewModel
     
-    // user 객체를 받아 View를 초기화하고, viewModel도 함께 초기화합니다.
     init(user: User) {
         self.user = user
         self._viewModel = StateObject(wrappedValue: EditProfileViewModel(user: user))
@@ -24,52 +16,38 @@ struct EditProfileView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                // .systemGroupedBackground는 시스템에서 제공하는 배경 색상으로, iOS의 그룹화된 배경을 나타냅니다.
-                // 이 배경 색상은 일반적으로 설정 앱이나 그룹화된 리스트에서 사용됩니다.
-                // .edgesIgnoringSafeArea([.bottom, .horizontal])는 배경 색상이 화면의 하단과 양쪽 가장자리까지 확장되도록 설정합니다.
-                // 즉, Safe Area를 무시하고 배경 색상이 화면 전체에 적용됩니다.
-                Color(.systemGroupedBackground)
+                Color.theme.background
                     .edgesIgnoringSafeArea([.bottom, .horizontal])
-                // EditProfileView의 내용을 담고 있는 VStack입니다.
-                VStack {
-                    // name 과 프로필 사진을 나타내는 HStack입니다.
+                
+                VStack(alignment: .leading, spacing: 12) {
+                    // Name and Profile Picture
                     HStack {
                         VStack(alignment: .leading) {
                             Text("이름")
                                 .fontWeight(.semibold)
                             
                             Text(user.fullname)
+                                .foregroundColor(Color.theme.secondaryText)
                         }
                         // Spacer()로 Vstack과 프로필 사진 사이에 빈 공간을 만듭니다.
                         Spacer()
                         
                         PhotosPicker(selection: $viewModel.selectedItem)  {
-                            // PhotosPicker는 사용자가 사진을 선택할 수 있는 UI 요소입니다.
-                            // selection은 사용자가 선택한 사진을 저장하는 바인딩 변수입니다.
-                            // if let optional binding을 사용하여 선택된 이미지가 있을 때만 이미지를 표시합니다.
-                            // viewModel.profileImage는 선택된 이미지가 있는 경우에만 표시됩니다.
-                            // resizable()는 이미지를 크기에 맞게 조정합니다.
-                            // scaledToFill()은 이미지를 비율에 맞게 채웁니다.
-                            // frame은 이미지의 크기를 지정합니다.
-                            // clipShape(Circle())는 이미지를 원형으로 자릅니다.
-                            if let image = viewModel.profileImage{
+                            if let image = viewModel.profileImage {
                                 image
                                     .resizable()
                                     .scaledToFill()
                                     .frame(width: 40, height: 40)
                                     .clipShape(Circle())
-                            }else{
-                                // CircularProfileImageView는 원형 프로필 이미지를 표시하는 뷰입니다.
-                                CircularProfileImageView(user: user)
-                                
+                            } else {
+                                CircularProfileImageView(user: user, size: .small)
                             }
-                            
                         }
-                        
                     }
                     
-                    // bio 인물 소개를 나타내는 vstack입니다.
                     Divider()
+                    
+                    // Bio
                     VStack(alignment: .leading) {
                         Text("나를 표현하는 단어")
                             .fontWeight(.semibold)
@@ -83,46 +61,18 @@ struct EditProfileView: View {
                             axis: .vertical
                         )
                     }
-                    
-                    // Link를 입력할수있는 VStack 시작
-//                    Divider()
-//                    VStack(alignment: .leading) {
-//                        Text("링크")
-//                            .fontWeight(.semibold)
-//                        
-//                        // TextField는 사용자로부터 텍스트 입력을 받는 UI 요소입니다.
-//                        // axis: .vertical로 인해 여러 줄 입력이 가능하고 텍스트가 자동으로 줄바꿈됩니다.
-//                        // text는 @State로 선언된 bio 변수를 바인딩합니다.
-//                        // 즉, 사용자가 입력한 텍스트가 bio 변수에 저장됩니다.
-//                        TextField(
-//                            "링크 주소",
-//                            text: $link
-//                        )
-//                    }
-//                    
-//                    // Toggle이 위치하는 부분
-//                    Divider()
-                    // Toggle은 스위치 형태의 UI 요소로, 사용자가 켜고 끌 수 있는 기능을 제공합니다.
-                    // isOn은 Toggle의 상태를 나타내는 @State 변수입니다.
-                    // Toggle("Private profile", isOn: $isPrivateProfile)
-                    
                 }
-                // Vstack전체에 적용하는 modifier
-                // 첫번째 paading은 Vstack의 내부 콘텐트와 흰색배경사이의 여백을 주어서 테두리와 여백을 주는 것
-                // .overlay는 뷰를 겹쳐서 표시하는 것
-                // RoundedRectangle은 둥근 사각형을 만드는 것
-                // stroke는 테두리를 만드는 것
-                // lineWidth는 테두리의 두께를 설정하는 것
                 .font(.footnote)
+                .foregroundColor(Color.theme.primaryText)
                 .padding()
-                .background(.white)
+                .background(Color.theme.background)
                 .cornerRadius(10)
                 .overlay {
                     // RoundedRectangle은 둥근 사각형을 만드는 것
                     // stroke는 테두리를 만드는 것
                     // lineWidth는 테두리의 두께를 설정하는 것
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color(.systemGray4), lineWidth: 1)
+                        .stroke(Color.theme.secondaryText.opacity(0.5), lineWidth: 1)
                 }
                 // 두번째 padding은 전체 카드형 UI(테두리가 있는 흰색 배경)와 화면 가장자리 사이의 여백을 만듦
                 .padding()
@@ -143,7 +93,7 @@ struct EditProfileView: View {
                         dismiss()
                     }
                     .font(.subheadline)
-                    .foregroundColor(.black)
+                    .foregroundColor(Color.theme.primaryText)
                 }
                 // 2번째 ToolbarItem은 내비게이션 바의 오른쪽에 추가됩니다.
                 // 이 버튼은 "Done"이라는 텍스트를 가지고 있으며, 눌렀을 때의 동작을 정의합니다.
@@ -158,7 +108,7 @@ struct EditProfileView: View {
                     }
                     .font(.subheadline)
                     .fontWeight(.semibold)
-                    .foregroundColor(.black)
+                    .foregroundColor(Color.theme.accent)
                 }
             }
         }
@@ -175,8 +125,3 @@ struct EditProfileView_Previews: PreviewProvider {
         EditProfileView(user: dev.user)
     }
 }
-
-
-//#Preview {
-//    EditProfileView()
-//}

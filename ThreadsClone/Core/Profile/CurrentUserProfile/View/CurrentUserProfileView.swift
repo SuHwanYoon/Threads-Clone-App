@@ -19,6 +19,7 @@ struct CurrentUserProfileView: View {
         // 현재 로그인된 사용자의 정보를 가져옵니다.
         return viewModel.currentUser
     }
+    
     var body: some View {
         NavigationStack{
             // showsIndicators: false는 스크롤바를 숨깁니다.
@@ -47,13 +48,13 @@ struct CurrentUserProfileView: View {
                         Text("프로필 수정")
                             .font(.subheadline)
                             .fontWeight(.semibold)
-                            .foregroundColor(.black)
+                            .foregroundColor(Color.theme.primaryText)
                             .frame(width: 352, height: 32)
-                            .background(.white)
+                            .background(.clear)
                             .cornerRadius(8)
                             .overlay {
                                 RoundedRectangle(cornerRadius: 8)
-                                    .stroke(Color(.systemGray4), lineWidth: 1)
+                                    .stroke(Color.theme.secondaryText, lineWidth: 1)
                             }
                     }
                     // UserContentListView는 사용자 콘텐츠 목록을 표시하는 뷰입니다.
@@ -62,7 +63,7 @@ struct CurrentUserProfileView: View {
                         UserContentListView(user: user)
                     }
                 }
-                
+                .padding(.horizontal)
             }
             .sheet(isPresented: $showEditProfile, content: {
                 // .sheet는 모달 시트를 표시하는 데 사용됩니다.
@@ -78,28 +79,15 @@ struct CurrentUserProfileView: View {
                         .environmentObject(viewModel)
                 }
             })
-            .toolbar{
-                // .toolbar는 내비게이션 바에 툴바를 추가하는 데 사용됩니다.
-                // ToolbarItem은 툴바에 아이템을 추가하는 것입니다.
-                // placement는 아이템이 툴바의 어느 위치에 배치될지를 정의합니다.
-                // topBarTrailing은 툴바의 오른쪽 상단에 배치됩니다.
-                // 우측 상단에 톱니바퀴모양의 설정 버튼을 추가
-                ToolbarItem(placement: .topBarTrailing) {
-                    //                    Button {
-                    //                        AuthService.shared.signOut()
-                    //                    } label: {
-                    //                        // sign out image button
-                    //                        Image(systemName: "gearshape")
-                    //                    }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     NavigationLink(destination: SettingListView()) {
                         Image(systemName: "gearshape")
+                            .foregroundColor(Color.theme.accent)
                     }
                 }
             }
-            // showsIndicators속성의 기본값은 true입니다.
-            // .padding(.horizontal)은 좌우 여백을 주는 것
-            .padding(.horizontal)
-            
+            .background(Color.theme.background)
         }
     }
 }

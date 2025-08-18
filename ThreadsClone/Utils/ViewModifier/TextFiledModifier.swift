@@ -12,8 +12,11 @@ struct TextFiledModifier: ViewModifier {
         content
             .font(.subheadline)
             .padding(12)
-            .background(Color(.systemGray6))
-            .cornerRadius(10)
+            .background(.clear)
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(Color.theme.secondaryText, lineWidth: 1)
+            )
             .padding(.horizontal, 24)
     }
 
