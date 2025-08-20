@@ -101,10 +101,10 @@ struct ThreadsTabView: View {
         // 사용자가 업로드 탭(+)을 탭하면 selectedTab이 2가 됨
         // 이때 showCreateThreadsView = true가 되어 CreateThreadsView가 모달로 표시됨
         // 다른 탭으로 이동하면 showCreateThreadsView = false가 되어 모달이 표시되지 않음
-        .onChange(of: selectedTab) { oldValue, newValue in
-            // 사용자가 업로드 탭을 선택했을 때
-            // selectedTab == 2 -> true로 설정되어 showCreateThreadsView 상태변수에 할당
-            showCreateThreadsView = selectedTab == 2
+        .onChange(of: selectedTab) { newValue in
+            // selectedTab이 변경될 때 전달받은 새로운 값(newValue)을 사용합니다.
+            // 이 방식이 코드의 의도를 더 명확하게 보여줍니다.
+            showCreateThreadsView = (newValue == 2)
         }
         // .sheet는 모달 시트(아래에서 위로올라오는 UI)를표시하고 아래로 스와이프하여 닫을 수 있습니다.
         // isPresented는 시트가 어떻게 표시될지 여부를 결정하는 바인딩이고
