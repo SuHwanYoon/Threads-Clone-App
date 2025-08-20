@@ -64,13 +64,13 @@ struct ThreadCell: View {
                     // 가로 버튼 스택
                     // heart, comment, share, send 버튼
                     HStack(spacing: 16) {
-                        Button {
-                            // 하트 토글
-                            isLiked.toggle()
-                        } label: {
-                            Image(systemName: isLiked ? "heart.fill" : "heart")
-                                .foregroundColor(isLiked ? Color.theme.accent : Color.theme.primaryText)
-                        }
+//                        Button {
+//                            // 하트 토글
+//                            isLiked.toggle()
+//                        } label: {
+//                            Image(systemName: isLiked ? "heart.fill" : "heart")
+//                                .foregroundColor(isLiked ? Color.theme.accent : Color.theme.primaryText)
+//                        }
                         
 //                        Button {
 //                            // Comment action

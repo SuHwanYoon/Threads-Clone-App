@@ -9,8 +9,10 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
-// 이 서비스는 싱글톤 패턴을 사용하여 애플리케이션 전역에서 단일 인스턴스를 공유합니다.
-// Service는 화면과 분리된 데이터 처리 모듈
+/*
+ 이 서비스는 싱글톤 패턴을 사용하여 애플리케이션 전역에서 단일 인스턴스를 공유합니다.
+ Service는 화면과 분리된 데이터 처리 모듈
+ */
 class UserService {
     // @Published 프로퍼티를 사용하여 현재 사용자 정보를 저장하고, SwiftUI에서 이 정보를 구독할 수 있도록 합니다.
     // currentUser 프로퍼티는 Firebase에서 사용자 데이터를 가져올때마다 업데이트하고
