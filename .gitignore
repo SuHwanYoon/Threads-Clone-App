@@ -70,6 +70,8 @@ ThreadsCloneUITests/
 
 # Firebase
 ThreadsClone/GoogleService-Info.plist
+GoogleService-Info.plist
+
 
 # Xcode user & shared data
 *.xcuserstate
