@@ -1,3 +1,9 @@
+# 🚀 Release v1.0.1
+
+## ❌ Firebase 접속불가 확인
+  - 25.08.28 10:00 Firebase 접속불가확인
+  - API교체후 1.02로 재심사 제출 완료 (현재 심사대기중 25.08.28 12:00)
+
 # Tech Stack
 - **UI**: SwiftUI
 - **Backend**: Firebase (Firestore, Authentication, Storage)
