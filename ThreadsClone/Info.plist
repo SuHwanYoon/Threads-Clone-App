@@ -8,5 +8,7 @@
 		<string>ko</string>
 		<string>ja</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>프로필 사진을 변경하기 위해 사진첩에 접근합니다</string>
 </dict>
 </plist>
