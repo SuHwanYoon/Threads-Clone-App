@@ -7,19 +7,37 @@
 
 import SwiftUI
 import FirebaseCore
+import FirebaseAppCheck // ✨ FirebaseAppCheck 모듈 임포트
+
+// ✨ 1. FirebaseAppCheckProviderFactory를 구현합니다.
+// 이 Factory는 앱 체크가 어떤 Provider(여기서는 App Attest)를 사용할지 Firebase에 알려줍니다.
+class YourAppCheckProviderFactory: NSObject, AppCheckProviderFactory {
+    func createProvider(with app: FirebaseApp) -> AppCheckProvider? {
+        if #available(iOS 14.0, *) {
+            // iOS 14.0 이상에서는 FFIAppCheckAppAttestProvider를 사용합니다.
+            return AppAttestProvider(app: app)
+        } else {
+            return DeviceCheckProvider(app: app)
+        }
+    }
+}
 
 // AppDelegate는 UIApplicationDelegate 프로토콜을 채택하여 앱의 생명주기를 관리합니다.
-//  FirebaseApp.configure()를 호출하여 Firebase를 초기화합니다.
-//  이 코드는 앱이 시작될 때 Firebase를 설정하는 역할을 합니다.
+// FirebaseApp.configure()를 호출하여 Firebase를 초기화합니다.
+// 이 코드는 앱이 시작될 때 Firebase를 설정하는 역할을 합니다.
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+
+    // ✨ 2. IMPORTANT: FirebaseApp.configure() 호출 전에 App Check 공급자 팩토리를 등록해야 합니다.
+    // 이 줄을 FirebaseApp.configure() 호출보다 먼저 추가합니다.
+    AppCheck.setAppCheckProviderFactory(YourAppCheckProviderFactory())
+
     FirebaseApp.configure()
 
     return true
   }
 }
-
 
 @main
 struct ThreadsCloneApp: App {
@@ -30,7 +48,6 @@ struct ThreadsCloneApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                
         }
     }
 }

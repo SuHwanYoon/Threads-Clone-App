@@ -51,11 +51,15 @@ class EditProfileViewModel: ObservableObject {
     private func withTimeout(seconds: TimeInterval, operation: @escaping () async throws -> Void) async throws {
         try await withThrowingTaskGroup(of: Void.self) { group in
             group.addTask { try await operation() }
-            group.addTask { try await Task.sleep(for: .seconds(seconds)); throw UploadError.timeout }
+            group.addTask {
+                try await Task.sleep(for: .seconds(seconds))
+                throw UploadError.timeout
+            }
             try await group.next() // 첫 번째로 완료되는 작업(성공 또는 타임아웃)의 결과를 기다립니다.
             group.cancelAll() // 한 작업이 완료되면 다른 작업을 취소합니다.
         }
     }
+    
     
     @MainActor
     private func loadImage() async {

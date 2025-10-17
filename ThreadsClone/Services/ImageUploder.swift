@@ -26,7 +26,10 @@ struct ImageUploader {
             let metadata = StorageMetadata()
             metadata.contentType = "image/jpeg"
             
-            let _ = try await storageRef.putDataAsync(imageData, metadata: metadata)
+            // ✅ 여기에 타임아웃을 추가합니다. (예: 30초)
+            let _ = try await withTimeout(seconds: 15) {
+                try await storageRef.putDataAsync(imageData, metadata: metadata)
+            }
             
             print("✅ putDataAsync 완료")
             print("⏳ downloadURL 가져오는 중...")

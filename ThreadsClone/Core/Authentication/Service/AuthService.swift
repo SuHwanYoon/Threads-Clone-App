@@ -50,6 +50,7 @@ class AuthService{
         } catch{
             // error.localizedDescription은 로그인 중 발생한 오류의 설명을 출력합니다.
             print("Debug: Failed to Login user with error: \(error.localizedDescription)")
+            throw error
         }
     }
     

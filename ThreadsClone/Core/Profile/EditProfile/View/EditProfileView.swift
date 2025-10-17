@@ -125,6 +125,13 @@ struct EditProfileView: View {
                 } message: {
                     Text(uploadError?.localizedDescription ?? "프로필 업데이트 중 오류가 발생했습니다. 다시 시도해주세요.")
                 }
+                // viewModel.errorMessage 값이 변경될 때마다 이 클로저가 실행됩니다.
+                .onChange(of: viewModel.errorMessage) { _, newValue in
+                    if newValue != nil {
+                        uploadError = NSError(domain: "ViewModelError", code: 0, userInfo: [NSLocalizedDescriptionKey: newValue!])
+                        showErrorAlert = true
+                    }
+                }
             }
             
             if isLoading {
