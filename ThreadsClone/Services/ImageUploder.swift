@@ -6,6 +6,10 @@ struct ImageUploader {
     static func uploadImage(_image: UIImage) async throws -> String? {
         print("🔧 ImageUploader 시작")
         
+        // ✅ IPv4 강제 설정 (테스트용)
+        let config = URLSessionConfiguration.default
+        config.multipathServiceType = .none
+        
         guard let imageData = _image.jpegData(compressionQuality: 0.25) else {
             print("❌ JPEG 압축 실패")
             return nil
@@ -26,15 +30,19 @@ struct ImageUploader {
             let metadata = StorageMetadata()
             metadata.contentType = "image/jpeg"
             
-            // ✅ 여기에 타임아웃을 추가합니다. (예: 30초)
-            let _ = try await withTimeout(seconds: 15) {
+            // ✅ 수정 (반환값을 받음)
+            // 1. 이미지 업로드에 10초 타임아웃 설정
+            _ = try await withTimeout(seconds: 10.0) {
                 try await storageRef.putDataAsync(imageData, metadata: metadata)
             }
             
             print("✅ putDataAsync 완료")
             print("⏳ downloadURL 가져오는 중...")
             
-            let url = try await storageRef.downloadURL()
+            // 2. URL 다운로드에 10초 타임아웃 설정
+            let url = try await withTimeout(seconds: 10.0) {
+                try await storageRef.downloadURL()
+            }
             
             print("✅ downloadURL 획득: \(url.absoluteString)")
             

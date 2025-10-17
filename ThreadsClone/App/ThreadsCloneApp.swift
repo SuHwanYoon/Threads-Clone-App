@@ -13,12 +13,25 @@ import FirebaseAppCheck // ✨ FirebaseAppCheck 모듈 임포트
 // 이 Factory는 앱 체크가 어떤 Provider(여기서는 App Attest)를 사용할지 Firebase에 알려줍니다.
 class YourAppCheckProviderFactory: NSObject, AppCheckProviderFactory {
     func createProvider(with app: FirebaseApp) -> AppCheckProvider? {
+        // #if targetEnvironment(simulator) 전처리 지시문을 사용하여 시뮬레이터 환경을 감지합니다.
+        #if targetEnvironment(simulator)
+        // 시뮬레이터에서는 App Attest를 사용할 수 없으므로 DebugAppCheckProvider를 사용합니다.
+        let provider = AppCheckDebugProvider(app: app)
+
+        // 중요: Debug Token을 콘솔에 출력합니다. 이 토큰을 Firebase Console에 등록해야 합니다.
+        print("Firebase App Check debug token (simulator): \(provider?.localDebugToken() ?? "" )")
+
+        return provider
+        #else
+        // 물리 기기에서는 기존 로직을 유지합니다.
         if #available(iOS 14.0, *) {
-            // iOS 14.0 이상에서는 FFIAppCheckAppAttestProvider를 사용합니다.
+            // iOS 14.0 이상에서는 AppAttestProvider를 사용합니다.
             return AppAttestProvider(app: app)
         } else {
+            // iOS 14.0 미만에서는 DeviceCheckProvider를 사용합니다.
             return DeviceCheckProvider(app: app)
         }
+        #endif
     }
 }
 

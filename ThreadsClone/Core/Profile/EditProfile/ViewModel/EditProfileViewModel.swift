@@ -5,15 +5,13 @@ import Combine
 class EditProfileViewModel: ObservableObject {
     
     // 업로드 중 발생할 수 있는 오류를 정의합니다.
-    enum UploadError: Error, LocalizedError {
+    enum UploadError: Error, LocalizedError { // .timeout 케이스를 제거합니다.
         case imageUploadFailed
-        case timeout
         
         // 각 오류에 대한 사용자 친화적인 설명을 제공합니다.
         var errorDescription: String? {
             switch self {
             case .imageUploadFailed: return "이미지 업로드에 실패했습니다. 네트워크 연결을 확인하고 다시 시도해주세요."
-            case .timeout: return "요청 시간이 초과되었습니다. 네트워크 연결을 확인하고 다시 시도해주세요."
             }
         }
     }
@@ -38,7 +36,7 @@ class EditProfileViewModel: ObservableObject {
     
     func updateUserData() async throws {
         // 10초의 시간 제한을 설정합니다.
-        let timeout: TimeInterval = 10.0
+        let timeout: TimeInterval = 15.0
         
         try await withTimeout(seconds: timeout) {
             // 프로필 이미지와 바이오 정보를 순차적으로 업데이트합니다.
@@ -46,20 +44,6 @@ class EditProfileViewModel: ObservableObject {
             try await self.updateBio()
         }
     }
-    
-    // 시간 제한을 적용하는 래퍼 함수
-    private func withTimeout(seconds: TimeInterval, operation: @escaping () async throws -> Void) async throws {
-        try await withThrowingTaskGroup(of: Void.self) { group in
-            group.addTask { try await operation() }
-            group.addTask {
-                try await Task.sleep(for: .seconds(seconds))
-                throw UploadError.timeout
-            }
-            try await group.next() // 첫 번째로 완료되는 작업(성공 또는 타임아웃)의 결과를 기다립니다.
-            group.cancelAll() // 한 작업이 완료되면 다른 작업을 취소합니다.
-        }
-    }
-    
     
     @MainActor
     private func loadImage() async {
