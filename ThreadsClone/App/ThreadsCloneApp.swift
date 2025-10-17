@@ -28,6 +28,22 @@ class YourAppCheckProviderFactory: NSObject, AppCheckProviderFactory {
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+      // ✅ 환경 변수 확인 코드 추가
+      if let storageDebug = ProcessInfo.processInfo.environment["FIREBASE_STORAGE_DEBUG_ENABLED"] {
+          print(">>> Environment Check: FIREBASE_STORAGE_DEBUG_ENABLED = \(storageDebug)")
+      } else {
+          print(">>> Environment Check: FIREBASE_STORAGE_DEBUG_ENABLED not found in environment.")
+      }
+      if let appCheckDebug = ProcessInfo.processInfo.environment["FIREBASE_APP_CHECK_DEBUG_VERBOSE"] {
+          print(">>> Environment Check: FIREBASE_APP_CHECK_DEBUG_VERBOSE = \(appCheckDebug)")
+      } else {
+          print(">>> Environment Check: FIREBASE_APP_CHECK_DEBUG_VERBOSE not found in environment.")
+      }
+      if let analyticsDebug = ProcessInfo.processInfo.environment["FIREBASE_ANALYTICS_DEBUG_ENABLE"] {
+          print(">>> Environment Check: FIREBASE_ANALYTICS_DEBUG_ENABLE = \(analyticsDebug)")
+      } else {
+          print(">>> Environment Check: FIREBASE_ANALYTICS_DEBUG_ENABLE not found in environment.")
+      }
 
     // ✨ 2. IMPORTANT: FirebaseApp.configure() 호출 전에 App Check 공급자 팩토리를 등록해야 합니다.
     // 이 줄을 FirebaseApp.configure() 호출보다 먼저 추가합니다.
