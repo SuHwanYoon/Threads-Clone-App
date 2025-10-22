@@ -62,18 +62,26 @@ struct LoginView: View {
 
                 Button {
                     // Task는 Swift Concurrency에서 비동기 작업을 나타내는 구조체입니다.
-                    // await로 비동기 작업이 완료될 때까지 기다림
-                    Task { try await viewModel.login() }
+                    Task { await viewModel.login() }
                 } label: {
-                    Text("로그인")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                        .frame(width: 352, height: 44)
-                        .background(Color.theme.accent)
-                        .cornerRadius(8)
+                    if viewModel.isLoading {
+                        ProgressView()
+                            .tint(.white)
+                    } else {
+                        Text("로그인")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                    }
                 }
+                .frame(width: 352, height: 44)
+                .background(Color.theme.accent)
+                .cornerRadius(8)
                 .padding(.vertical)
+                // isLoading이 true일 때 버튼을 비활성화합니다.
+                .disabled(viewModel.isLoading)
+                // 버튼이 비활성화 상태일 때 투명도를 조절합니다.
+                .opacity(viewModel.isLoading ? 0.7 : 1.0)
 
                 Spacer()
 
@@ -98,6 +106,11 @@ struct LoginView: View {
                 .padding(.vertical, 16)
             }
             .background(Color.theme.background)
+            .alert(isPresented: $viewModel.showAlert) {
+                Alert(title: Text("로그인 실패"),
+                      message: Text(viewModel.authError?.description ?? "알 수 없는 오류가 발생했습니다."),
+                      dismissButton: .default(Text("확인")))
+            }
         }
     }
 }

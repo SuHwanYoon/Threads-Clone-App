@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		67257A952EA202E600BD6437 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 67257A942EA202E600BD6437 /* FirebaseAppCheck */; };
 		672E751B2E4309C3001F9587 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 672E751A2E4309C3001F9587 /* Kingfisher */; };
 		6734B4EB2DC8AFF600B0D468 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6734B4EA2DC8AFF600B0D468 /* README.md */; };
 		6734B4EF2DC8B0CF00B0D468 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6734B4EE2DC8B0CF00B0D468 /* .gitignore */; };
@@ -84,6 +85,7 @@
 				672E751B2E4309C3001F9587 /* Kingfisher in Frameworks */,
 				67B56DB92DFFDF4D00FEE91C /* FirebaseAuth in Frameworks */,
 				67B56DBB2DFFDF4D00FEE91C /* FirebaseFirestore in Frameworks */,
+				67257A952EA202E600BD6437 /* FirebaseAppCheck in Frameworks */,
 				67B56DBD2DFFDF4D00FEE91C /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -105,6 +107,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		67257A932EA202E600BD6437 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		676FFAD82DC86A4400B92CF6 = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +123,7 @@
 				676FFAE32DC86A4400B92CF6 /* ThreadsClone */,
 				676FFAF12DC86A4500B92CF6 /* ThreadsCloneTests */,
 				676FFAFB2DC86A4500B92CF6 /* ThreadsCloneUITests */,
+				67257A932EA202E600BD6437 /* Frameworks */,
 				676FFAE22DC86A4400B92CF6 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -153,6 +163,7 @@
 				67B56DBA2DFFDF4D00FEE91C /* FirebaseFirestore */,
 				67B56DBC2DFFDF4D00FEE91C /* FirebaseStorage */,
 				672E751A2E4309C3001F9587 /* Kingfisher */,
+				67257A942EA202E600BD6437 /* FirebaseAppCheck */,
 			);
 			productName = ThreadsClone;
 			productReference = 676FFAE12DC86A4400B92CF6 /* ThreadsClone.app */;
@@ -443,6 +454,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ThreadsClone/ThreadsClone.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 8;
@@ -458,7 +470,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -480,6 +492,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ThreadsClone/ThreadsClone.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 8;
@@ -494,7 +507,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -648,6 +661,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		67257A942EA202E600BD6437 /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 67B56DB72DFFDF4D00FEE91C /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
 		672E751A2E4309C3001F9587 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 672E75192E4309C3001F9587 /* XCRemoteSwiftPackageReference "Kingfisher" */;

@@ -50,6 +50,7 @@ class AuthService{
         } catch{
             // error.localizedDescription은 로그인 중 발생한 오류의 설명을 출력합니다.
             print("Debug: Failed to Login user with error: \(error.localizedDescription)")
+            throw error
         }
     }
     
@@ -70,6 +71,7 @@ class AuthService{
             try await uploadUserData(withEmail: email, fullname: fullName, username: username, id: createUserResult.user.uid)
         } catch{
             print("Debug: Failed to create user with error: \(error.localizedDescription)")
+            throw error
         }
     }
     
