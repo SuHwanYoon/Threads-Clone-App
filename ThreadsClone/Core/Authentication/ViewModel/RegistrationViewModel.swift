@@ -23,6 +23,13 @@ class RegistrationViewModel: ObservableObject {
     @Published  var password: String = ""
     @Published  var fullname: String = ""
     @Published  var username: String = ""
+    @Published  var isLoading = false
+    @Published  var showAlert = false
+    @Published  var errorMessage: String?
+    @Published  var isEmailInvalid = false
+    @Published  var isPasswordInvalid = false
+    @Published  var isFullnameInvalid = false
+    @Published  var isUsernameInvalid = false
     
     
     // @MainActor는 SwiftUI에서 UI 업데이트를 안전하게 처리하기 위해 사용되는 속성입니다.
@@ -34,13 +41,35 @@ class RegistrationViewModel: ObservableObject {
     // shared는 AuthService의 싱글톤 인스턴스를 사용하여 사용자 생성 작업을 수행합니다.
     // crateUser 메서드는 이메일, 비밀번호, 전체 이름, 사용자 이름을 사용하여 새로운 사용자를 생성하고 Firestore에 저장합니다.
     @MainActor
-    func createUser() async throws {
+    func createUser() async {
+        guard validateFields() else {
+            self.showAlert = true
+            self.errorMessage = "모든 필드를 채워주세요."
+            return
+        }
+        
         // try await는 비동기 작업을 실행하고, 해당 작업이 실패할 경우 오류를 던집니다.
-        try await AuthService.shared.createUser(
-            withEmail: email,
-            password: password,
-            fullName: fullname,
-            username: username)
+        isLoading = true
+        do {
+            try await AuthService.shared.createUser(
+                withEmail: email,
+                password: password,
+                fullName: fullname,
+                username: username)
+        } catch {
+            self.showAlert = true
+            self.errorMessage = error.localizedDescription
+        }
+        isLoading = false
+    }
+    
+    private func validateFields() -> Bool {
+        isEmailInvalid = email.isEmpty
+        isPasswordInvalid = password.isEmpty
+        isFullnameInvalid = fullname.isEmpty
+        isUsernameInvalid = username.isEmpty
+        
+        return !isEmailInvalid && !isPasswordInvalid && !isFullnameInvalid && !isUsernameInvalid
     }
     
 }

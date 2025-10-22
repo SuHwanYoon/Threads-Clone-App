@@ -71,6 +71,7 @@ class AuthService{
             try await uploadUserData(withEmail: email, fullname: fullName, username: username, id: createUserResult.user.uid)
         } catch{
             print("Debug: Failed to create user with error: \(error.localizedDescription)")
+            throw error
         }
     }
     

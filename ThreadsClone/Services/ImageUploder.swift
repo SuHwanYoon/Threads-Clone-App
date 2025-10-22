@@ -4,7 +4,7 @@ import FirebaseStorage
 
 struct ImageUploader {
     static func uploadImage(_image: UIImage) async throws -> String? {
-        print("🔧 ImageUploader 시작")
+        print("🔧 debug:photoUpload branch ImageUploader 시작")
         
         // ✅ IPv4 강제 설정 (테스트용)
         let config = URLSessionConfiguration.default

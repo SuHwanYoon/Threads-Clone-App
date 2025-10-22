@@ -28,37 +28,48 @@ struct RegistrationView: View {
                 .frame(width: 120, height: 120)
                 .padding()
 
-            VStack {
+            VStack(spacing: 12) {
                 TextField("이메일을 입력해주세요", text: $viewModel.email)
                     .autocapitalization(.none) // 이메일 입력 시 자동 대문자 변환을 방지합니다.
                     .modifier(TextFiledModifier())
+                    
                 
                 SecureField("패스워드를 입력해주세요", text: $viewModel.password)
                     .modifier(TextFiledModifier())
+                    
                 
                 TextField("계정이름을 입력해주세요", text: $viewModel.fullname)
+                    .autocapitalization(.none) // 이메일 입력 시 자동 대문자 변환을 방지합니다.
                     .modifier(TextFiledModifier())
+                    
                 
                 TextField("닉네임을 입력해주세요", text: $viewModel.username)
                     .autocapitalization(.none)
                     .modifier(TextFiledModifier())
+                    
             }
 
             Button {
                 // Task는 Swift Concurrency에서 비동기 작업을 나타내는 구조체입니다.
                 // try await를 사용하여 비동기 작업을 수행합니다.
-                // viewModel.createUser() 메서드를 호출하여 사용자를 생성합니다.
-                Task { try await viewModel.createUser() }
+                Task { await viewModel.createUser() }
             } label: {
-                Text("회원가입")
-                    .font(.subheadline)
-                    .fontWeight(.semibold)
-                    .foregroundColor(.white)
-                    .frame(width: 352, height: 44)
-                    .background(Color.theme.accent)
-                    .cornerRadius(8)
+                if viewModel.isLoading {
+                    ProgressView()
+                        .tint(.white)
+                } else {
+                    Text("회원가입")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                }
             }
+            .frame(width: 352, height: 44)
+            .background(Color.theme.accent)
+            .cornerRadius(8)
             .padding(.vertical)
+            .disabled(viewModel.isLoading)
+            .opacity(viewModel.isLoading ? 0.7 : 1.0)
 
             Spacer()
 
@@ -83,6 +94,11 @@ struct RegistrationView: View {
         }
         .background(Color.theme.background)
         .ignoresSafeArea()
+        .alert("회원가입 실패", isPresented: $viewModel.showAlert) {
+            Button("확인") { }
+        } message: {
+            Text(viewModel.errorMessage ?? "알 수 없는 오류가 발생했습니다. 다시 시도해주세요.")
+        }
     }
 }
 
