@@ -1,8 +1,10 @@
 import SwiftUI
+import FirebaseAuth
 
 struct SettingListView: View {
     @State private var showDeleteConfirmation = false
     @State private var deletionError: Error?
+    @State private var isDeleting = false
     @State private var showErrorAlert = false
     
     var body: some View {
@@ -41,13 +43,24 @@ struct SettingListView: View {
                             .foregroundColor(Color.theme.secondaryText)
                     }
                 }
+                .disabled(isDeleting)
                 .scrollContentBackground(.hidden)
+                
+                if isDeleting {
+                    ZStack {
+                        Color.black.opacity(0.5).ignoresSafeArea()
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                            .scaleEffect(1.5)
+                    }
+                }
             }
             .navigationTitle("설정")
             .navigationBarTitleDisplayMode(.inline)
             .alert("계정을 삭제하시겠습니까?", isPresented: $showDeleteConfirmation) {
                 Button("취소", role: .cancel) { }
                 Button("삭제", role: .destructive) {
+                    isDeleting = true
                     Task {
                         do {
                             try await AuthService.shared.deleteAccount()
@@ -55,6 +68,7 @@ struct SettingListView: View {
                             self.deletionError = error
                             self.showErrorAlert = true
                         }
+                        isDeleting = false
                     }
                 }
             } message: {
@@ -63,7 +77,13 @@ struct SettingListView: View {
             .alert("오류", isPresented: $showErrorAlert) {
                 Button("확인") { }
             } message: {
-                Text(deletionError?.localizedDescription ?? "알 수 없는 오류가 발생했습니다.")
+                if let authError = deletionError as? NSError, authError.code == AuthErrorCode.requiresRecentLogin.rawValue {
+                    Text("보안을 위해 최근에 다시 로그인해야 합니다. 로그아웃 후 다시 로그인하여 시도해주세요.")
+                } else if let error = deletionError {
+                    Text("계정 삭제 중 오류가 발생했습니다: \(error.localizedDescription)")
+                } else {
+                    Text("알 수 없는 오류가 발생했습니다.")
+                }
             }
         }
     }
