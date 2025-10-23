@@ -69,6 +69,10 @@ class AuthService{
             print("Debug: User created with UID: \(createUserResult.user.uid)")
             // uploadUserData 메서드를 호출하여 Firestore에 사용자 데이터를 업로드합니다.
             try await uploadUserData(withEmail: email, fullname: fullName, username: username, id: createUserResult.user.uid)
+            
+            // Firestore에 사용자 데이터가 성공적으로 업로드된 후, UserService의 currentUser를 갱신합니다.
+            // 이렇게 하면 UserService가 최신 사용자 정보를 즉시 반영할 수 있습니다.
+            try await UserService.shared.fetchCurrentUser()
         } catch{
             print("Debug: Failed to create user with error: \(error.localizedDescription)")
             throw error
