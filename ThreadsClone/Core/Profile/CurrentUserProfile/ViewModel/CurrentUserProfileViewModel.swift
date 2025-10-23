@@ -37,8 +37,20 @@ class CurrentUserProfileViewModel: ObservableObject {
     // currentUser가 업데이트될 때마다 호출됩니다.
     private func setupSubscribers() {
         UserService.shared.$currentUser.sink { [weak self] user in
-            self?.currentUser = user
-            print("Debug: User in view model from combine is: \(String(describing: user))")
+            guard let self = self else { return }
+            self.currentUser = user
+            
+            // 신규 가입 직후 또는 데이터 로드 실패 시 currentUser가 nil이거나
+            // fullname이 비어있는 상태일 수 있습니다.
+            // 이 경우, UserService에서 최신 사용자 정보를 다시 가져오도록 시도합니다.
+            // (user?.fullname ?? "").isEmpty는 user가 nil일 경우 ""를 반환하여 안전하게 체크합니다.
+            if self.currentUser == nil || (self.currentUser?.fullname ?? "").isEmpty {
+                print("Debug: Current user is nil or has incomplete data (fullname empty), attempting to refetch...")
+                Task {
+                    // UserService에 있는 fetchCurrentUser 함수를 호출하여 Firestore에서 최신 데이터를 다시 가져옵니다.
+                    try? await UserService.shared.fetchCurrentUser()
+                }
+            }
         }.store(in: &cancellables)
     }
     
