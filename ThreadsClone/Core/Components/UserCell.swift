@@ -20,49 +20,39 @@ struct UserCell: View {
             // 프로필 사진
             CircularProfileImageView(user: user)
                 
-
             VStack(alignment: .leading, spacing: 2) {
                 Text(user.username)
                     .fontWeight(.semibold)
+                    .foregroundColor(Color.theme.primaryText)
 
                 Text(user.fullname)
-
+                    .foregroundColor(Color.theme.secondaryText)
             }
             .font(.footnote)
+            
             // HStack의 요소들 사이에서 빈공간을 줌
             // 위에있는 Vstack은 alignment이 leading이므로 왼쪽 정렬
             Spacer()
 
             // follow 버튼
-            // overlay는 뷰를 겹쳐서 표시하는 것
-            // RoundedRectangle은 둥근 사각형을 만드는 것
-            // stroke는 테두리를 만드는 것
-            // lineWidth는 테두리의 두께를 설정하는 것
-            Text("Follow")
-                .font(.subheadline)
-                .fontWeight(.semibold)
-                .frame(width: 100, height: 32)
-                .overlay {
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color(.systemGray4), lineWidth: 1)
-                }
-                .hidden()
-
+//            Button {
+//                // Follow logic
+//            } label: {
+//                Text("Follow")
+//                    .font(.subheadline)
+//                    .fontWeight(.semibold)
+//                    .foregroundColor(.white)
+//                    .frame(width: 100, height: 32)
+//                    .background(Color.theme.accent)
+//                    .cornerRadius(10)
+//            }
         }
         .padding(.horizontal)
     }
 }
-
 
 struct UserCell_Previews: PreviewProvider {
     static var previews: some View {
         UserCell(user: dev.user)
     }
 }
-
-
-
-//
-//#Preview {
-//    UserCell(user: dev.user)
-//}

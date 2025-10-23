@@ -102,9 +102,7 @@ struct ThreadsTabView: View {
         // 이때 showCreateThreadsView = true가 되어 CreateThreadsView가 모달로 표시됨
         // 다른 탭으로 이동하면 showCreateThreadsView = false가 되어 모달이 표시되지 않음
         .onChange(of: selectedTab) { oldValue, newValue in
-            // 사용자가 업로드 탭을 선택했을 때
-            // selectedTab == 2 -> true로 설정되어 showCreateThreadsView 상태변수에 할당
-            showCreateThreadsView = selectedTab == 2
+            showCreateThreadsView = (newValue == 2)
         }
         // .sheet는 모달 시트(아래에서 위로올라오는 UI)를표시하고 아래로 스와이프하여 닫을 수 있습니다.
         // isPresented는 시트가 어떻게 표시될지 여부를 결정하는 바인딩이고
@@ -121,7 +119,7 @@ struct ThreadsTabView: View {
             content: { CreateThreadsView() }
         )
         // .tint는 하단 아이콘들의 색상을 설정합니다.
-        .tint(.black)
+        .tint(Color.theme.accent)
     }
 }
 

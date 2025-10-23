@@ -27,7 +27,7 @@ struct LoginView: View {
             VStack {
                 Spacer()
 
-                Image("inapp-icon-white2")
+                Image("login-title-image")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 120, height: 120)
@@ -41,39 +41,47 @@ struct LoginView: View {
                     // password 필드
                     SecureField("패스워드", text: $viewModel.password)
                         .modifier(TextFiledModifier())
-
                 }
+                
                 // NavigationLink는 SwiftUI에서 화면 전환을 관리하는 데 사용되는 구조입니다.
                 // NavigationLink는 화면을 전환할 때 사용됩니다.
                 // NavigationLink는 버튼처럼 작동합니다.
                 // NavigationLink는 destination을 지정하여 화면 전환을 관리합니다.
-                NavigationLink {
-                    Text("Forgot Password")
-                } label: {
-                    Text("Forgot Password?")
-                        .font(.footnote)
-                        .fontWeight(.semibold)
-                        .padding(.vertical)
-                        .padding(.top)
-                        .padding(.trailing, 20)
-                        .foregroundColor(.black)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                }
-                .hidden()
+//                NavigationLink {
+//                    Text("Forgot Password")
+//                } label: {
+//                    Text("Forgot Password?")
+//                        .font(.footnote)
+//                        .fontWeight(.semibold)
+//                        .padding(.vertical)
+//                        .padding(.top)
+//                        .padding(.trailing, 28)
+//                        .foregroundColor(Color.theme.secondaryText)
+//                        .frame(maxWidth: .infinity, alignment: .trailing)
+//                }
 
                 Button {
                     // Task는 Swift Concurrency에서 비동기 작업을 나타내는 구조체입니다.
-                    // await로 비동기 작업이 완료될 때까지 기다림
-                    Task {try await viewModel.login() }
+                    Task { await viewModel.login() }
                 } label: {
-                    Text("로그인")
-                        .font(.subheadline)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.white)
-                        .frame(width: 352, height: 44)
-                        .background(.black)
-                        .cornerRadius(8)
+                    if viewModel.isLoading {
+                        ProgressView()
+                            .tint(.white)
+                    } else {
+                        Text("로그인")
+                            .font(.subheadline)
+                            .fontWeight(.semibold)
+                            .foregroundColor(.white)
+                    }
                 }
+                .frame(width: 352, height: 44)
+                .background(Color.theme.accent)
+                .cornerRadius(8)
+                .padding(.vertical)
+                // isLoading이 true일 때 버튼을 비활성화합니다.
+                .disabled(viewModel.isLoading)
+                // 버튼이 비활성화 상태일 때 투명도를 조절합니다.
+                .opacity(viewModel.isLoading ? 0.7 : 1.0)
 
                 Spacer()
 
@@ -91,19 +99,22 @@ struct LoginView: View {
 
                         Text("계정등록")
                             .fontWeight(.semibold)
-
                     }
-                    .foregroundColor(.black)
+                    .foregroundColor(Color.theme.primaryText)
                     .font(.footnote)
                 }
                 .padding(.vertical, 16)
-
             }
-
+            .background(Color.theme.background)
+            .alert(isPresented: $viewModel.showAlert) {
+                Alert(title: Text("로그인 실패"),
+                      message: Text(viewModel.authError?.description ?? "알 수 없는 오류가 발생했습니다."),
+                      dismissButton: .default(Text("확인")))
+            }
         }
     }
 }
 
-#Preview(traits: .fixedLayout(width: 200, height: 400)) {
+#Preview {
     LoginView()
 }

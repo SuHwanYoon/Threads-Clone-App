@@ -64,5 +64,25 @@ struct ThreadService {
         // 따라서 최신 스레드가 배열의 첫 번째 요소가 됩니다.
         return threads.sorted(by: { $0.timestamp.dateValue() > $1.timestamp.dateValue() })
     }
+    
+    // 특정 사용자의 모든 스레드를 삭제합니다.
+    static func deleteUserThreads(uid: String) async throws {
+        // 1. 삭제할 스레드 찾기: "threads" 컬렉션에서 매개변수로 받은 uid와 일치하는 ownerUid를 가진 모든 문서를 가져옵니다.
+        let snapshot = try await Firestore.firestore().collection("threads").whereField("ownerUid", isEqualTo: uid).getDocuments()
+        
+        // 2. 일괄(Batch) 작업 생성: 여러 문서를 한 번의 요청으로 삭제하기 위해 batch 작업을 생성합니다.
+        // 이렇게 하면 여러 번의 개별 요청을 보내는 것보다 효율적입니다.
+        let batch = Firestore.firestore().batch()
+        
+        // 3. 삭제할 문서들을 batch에 추가: 찾은 모든 스레드 문서(snapshot.documents)를 순회하면서
+        // 각 문서의 참조(doc.reference)를 batch의 삭제 목록에 추가합니다.
+        snapshot.documents.forEach { doc in
+            batch.deleteDocument(doc.reference)
+        }
+        
+        // 4. Batch 작업 실행: 준비된 모든 삭제 작업을 한 번에 서버로 보내 실행합니다.
+        // 이 작업이 성공적으로 완료되면 해당 사용자의 모든 스레드가 삭제됩니다.
+        try await batch.commit()
+    }
 }
 

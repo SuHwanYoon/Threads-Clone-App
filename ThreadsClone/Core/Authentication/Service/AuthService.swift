@@ -50,6 +50,7 @@ class AuthService{
         } catch{
             // error.localizedDescription은 로그인 중 발생한 오류의 설명을 출력합니다.
             print("Debug: Failed to Login user with error: \(error.localizedDescription)")
+            throw error
         }
     }
     
@@ -68,8 +69,13 @@ class AuthService{
             print("Debug: User created with UID: \(createUserResult.user.uid)")
             // uploadUserData 메서드를 호출하여 Firestore에 사용자 데이터를 업로드합니다.
             try await uploadUserData(withEmail: email, fullname: fullName, username: username, id: createUserResult.user.uid)
+            
+            // Firestore에 사용자 데이터가 성공적으로 업로드된 후, UserService의 currentUser를 갱신합니다.
+            // 이렇게 하면 UserService가 최신 사용자 정보를 즉시 반영할 수 있습니다.
+            try await UserService.shared.fetchCurrentUser()
         } catch{
             print("Debug: Failed to create user with error: \(error.localizedDescription)")
+            throw error
         }
     }
     
@@ -96,16 +102,26 @@ class AuthService{
             return
         }
         
+        let userUID = user.uid
+        
         do {
-            // Firestore에서 사용자 문서를 삭제합니다.
-            try await Firestore.firestore().collection("users").document(user.uid).delete()
-            print("Debug: Firestore에서 사용자 데이터가 삭제되었습니다.")
-            
-            // Firebase Authentication에서 사용자를 삭제합니다.
+            // Firebase Authentication에서 사용자정보를 제일 먼저 삭제합니다.
             try await user.delete()
             print("Debug: Firebase Auth에서 사용자 계정이 삭제되었습니다.")
             
-            // 계정 삭제 후 로그아웃을 호출하여 로컬 세션을 정리합니다.
+            
+            // 해당 사용자가 작성한 모든 스레드를 삭제합니다.
+            // 스레드는 User정보에 의존하기 때문에 의존하는 쪽을 먼저 삭제
+            try await ThreadService.deleteUserThreads(uid: userUID)
+            print("Debug: 사용자의 모든 스레드가 삭제되었습니다.")
+            
+
+            // Firestore에서 사용자 문서를 삭제합니다.
+            // 마지막으로 User document를 삭제
+            try await Firestore.firestore().collection("users").document(userUID).delete()
+            print("Debug: Firestore에서 사용자 데이터가 삭제되었습니다.")
+            
+            // 계정정보, 해당유저의 스레드, 사용자 문서 삭제후 로그아웃을 호출하여 로컬 세션을 정리합니다.
             self.signOut()
             
         } catch {
