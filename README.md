@@ -1,4 +1,4 @@
-# 🚀 Release v1.0.4 (25.10.23)
+# 🚀 Release v1.0.5 (25.10.24)
 
 ## 🍎 iOS Threads Clone App
 ## Key Features
